@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baomidou.springwind.mapper.PartDao" >
+  <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.Part" >
+    <id column="part_id" property="partId" jdbcType="VARCHAR" />
+    <result column="part_value" property="partValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    part_id, part_value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from part
+    where part_id = #{partId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from part
+    where part_id = #{partId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baomidou.springwind.entity.Part" >
+    insert into part (part_id, part_value)
+    values (#{partId,jdbcType=VARCHAR}, #{partValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baomidou.springwind.entity.Part" >
+    insert into part
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="partId != null" >
+        part_id,
+      </if>
+      <if test="partValue != null" >
+        part_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="partId != null" >
+        #{partId,jdbcType=VARCHAR},
+      </if>
+      <if test="partValue != null" >
+        #{partValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baomidou.springwind.entity.Part" >
+    update part
+    <set >
+      <if test="partValue != null" >
+        part_value = #{partValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where part_id = #{partId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baomidou.springwind.entity.Part" >
+    update part
+    set part_value = #{partValue,jdbcType=VARCHAR}
+    where part_id = #{partId,jdbcType=VARCHAR}
+  </update>
+</mapper>

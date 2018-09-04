@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baomidou.springwind.mapper.NewsItemDao" >
+  <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.NewsItem" >
+    <id column="news_item_id" property="newsItemId" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="title_text" property="titleText" jdbcType="VARCHAR" />
+    <result column="title_image" property="titleImage" jdbcType="VARCHAR" />
+    <result column="describe_text" property="describeText" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    news_item_id, insert_time, title_text, title_image, describe_text
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from news_item
+    where news_item_id = #{newsItemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from news_item
+    where news_item_id = #{newsItemId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.baomidou.springwind.entity.NewsItem" >
+    insert into news_item (news_item_id, insert_time, title_text, 
+      title_image, describe_text)
+    values (#{newsItemId,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{titleText,jdbcType=VARCHAR}, 
+      #{titleImage,jdbcType=VARCHAR}, #{describeText,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baomidou.springwind.entity.NewsItem" >
+    insert into news_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newsItemId != null" >
+        news_item_id,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="titleText != null" >
+        title_text,
+      </if>
+      <if test="titleImage != null" >
+        title_image,
+      </if>
+      <if test="describeText != null" >
+        describe_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newsItemId != null" >
+        #{newsItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="titleText != null" >
+        #{titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImage != null" >
+        #{titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="describeText != null" >
+        #{describeText,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baomidou.springwind.entity.NewsItem" >
+    update news_item
+    <set >
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="titleText != null" >
+        title_text = #{titleText,jdbcType=VARCHAR},
+      </if>
+      <if test="titleImage != null" >
+        title_image = #{titleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="describeText != null" >
+        describe_text = #{describeText,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where news_item_id = #{newsItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baomidou.springwind.entity.NewsItem" >
+    update news_item
+    set insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      title_text = #{titleText,jdbcType=VARCHAR},
+      title_image = #{titleImage,jdbcType=VARCHAR},
+      describe_text = #{describeText,jdbcType=VARCHAR}
+    where news_item_id = #{newsItemId,jdbcType=VARCHAR}
+  </update>
+</mapper>
