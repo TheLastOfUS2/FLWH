@@ -1,0 +1,382 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+html,body{
+    position:relative;
+    height:100%;
+    min-height:100%;
+}
+body{
+	font-size: 14px;
+	font-family: "微软雅黑" !important;
+	background-color: #fafafa;
+}
+a{
+	text-decoration: none;
+}	
+*{
+	margin: 0px;
+	padding: 0px;
+}
+/*头部导航*/
+.one {
+/*width: 800px;*/
+/*height: 100px;*/
+/*background-color: yellow;*/
+}
+
+.fix {
+position: fixed;
+left: 0;
+top: 0;
+background-color: #fff;
+}
+.fix1 {
+position: fixed;
+left: 0;
+top: 65px;
+background-color: #fff;
+}
+
+
+@media screen and (min-width: 1001px){
+.header{
+	width: 100%;
+	height: 65px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 30;
+	line-height: 45px;
+}
+.header>img{
+     width: 200px; 
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.btn{
+	position: fixed;
+	right: 40px;
+	top: 20px;
+	cursor: pointer;
+}
+.nav{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.9);
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+	display: none;
+}
+.nav ul{
+	width: 100%;
+	height: 95%;
+	padding-top: 5%;
+	display: block;
+    list-style-type: none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+.nav li{
+	display: block;
+	width: 100%;
+	height: 12%;
+	text-align: center;
+}
+.nav ul li a{
+	display:block;
+	width: 50%;
+	margin-left: 25%;
+	height: 50%;
+	text-align: center;
+	color: #fff;
+	font-size: 22px;
+}
+.nav>a{
+	position: absolute;
+	top: 40px;
+	right: 40px;
+	cursor: pointer;
+}
+/*轮播*/
+#lunbobox {
+	width:100%;
+	position:relative;
+}
+.lunbo {
+	width:100%;
+}
+.lunbo img {
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+    /*float: left;*/
+}
+.lunbo a{
+    display: block;
+}
+#lunbobox{ 
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+#lunbobox ul {
+	width:100px;
+	position:absolute;
+	right:47%;
+	z-index:5;
+}
+#lunbobox ul li {
+	cursor:pointer;
+	width:10px;
+	height:10px;
+	border-radius: 50%;
+	border:1px solid #cccccc;
+	float:left;
+	list-style:none;
+	background:#fff;
+	text-align:center;
+	margin:0px 5px 0px 0px;
+}
+
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px){
+.header{
+	width: 100%;
+	height: 65px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 30;
+	line-height: 45px;
+}
+.header>img{
+     width: 200px; 
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.btn{
+	position: fixed;
+	right: 40px;
+	top: 20px;
+	cursor: pointer;
+}
+.nav{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.9);
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+	display: none;
+}
+.nav ul{
+	width: 100%;
+	height: 95%;
+	padding-top: 5%;
+	display: block;
+    list-style-type: none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+.nav li{
+	display: block;
+	width: 100%;
+	height: 12%;
+	text-align: center;
+}
+.nav ul li a{
+	display:block;
+	width: 50%;
+	margin-left: 25%;
+	height: 50%;
+	text-align: center;
+	color: #fff;
+	font-size: 22px;
+}
+.nav>a{
+	position: absolute;
+	top: 40px;
+	right: 40px;
+	cursor: pointer;
+}
+/*轮播*/
+#lunbobox {
+	width:100%;
+	position:relative;
+}
+.lunbo {
+	width:100%;
+}
+.lunbo img {
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+    /*float: left;*/
+}
+.lunbo a{
+    display: block;
+}
+#lunbobox{ 
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+#lunbobox ul {
+	width:100px;
+	position:absolute;
+	right:40%;
+	z-index:5;
+}
+#lunbobox ul li {
+	cursor:pointer;
+	width:10px;
+	height:10px;
+	border-radius: 50%;
+	border:1px solid #cccccc;
+	float:left;
+	list-style:none;
+	background:#fff;
+	text-align:center;
+	margin:0px 5px 0px 0px;
+}
+
+}
+
+@media screen and (max-width: 601px){
+.header{
+	width: 100%;
+	height: 65px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 30;
+	line-height: 45px;
+}
+.header>img{
+    width:25% !important; 
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.btn{
+	position: fixed;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+.nav{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.9);
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 10;
+	display: none;
+}
+.nav ul{
+	width: 100%;
+	height: 95%;
+	padding-top: 5%;
+	display: block;
+    list-style-type: none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+.nav li{
+	display: block;
+	width: 100%;
+	height: 12%;
+	text-align: center;
+}
+.nav ul li a{
+	display:block;
+	width: 50%;
+	margin-left: 25%;
+	height: 50%;
+	text-align: center;
+	color: #fff;
+	font-size: 22px;
+}
+.nav>a{
+	position: absolute;
+	top: 40px;
+	right: 40px;
+	cursor: pointer;
+}
+.del>img{
+	width: 25px;
+}
+/*轮播*/
+#lunbobox {
+	width:100%;
+	position:relative;
+}
+.lunbo {
+	width:100%;
+}
+.lunbo img {
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+    /*float: left;*/
+}
+.lunbo a{
+    display: block;
+}
+#lunbobox{ 
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+#lunbobox ul {
+	width:100px;
+	position:absolute;
+	right:34%;
+	z-index:5;
+}
+#lunbobox ul li {
+	cursor:pointer;
+	width:10px;
+	height:10px;
+	border-radius: 50%;
+	border:1px solid #cccccc;
+	float:left;
+	list-style:none;
+	background:#fff;
+	text-align:center;
+	margin:0px 5px 0px 0px;
+}
+
+}
+
+
+.middle_right{
+    position: relative;
+}
+.top{
+	position: fixed;
+	bottom: 30px;
+	right: 20px;
+	display: none;
+}

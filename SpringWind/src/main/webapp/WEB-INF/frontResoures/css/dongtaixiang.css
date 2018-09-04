@@ -1,0 +1,245 @@
+/*大于1000*/
+@media screen and (min-width: 1001px){
+.art{
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    padding-bottom: 40px;
+}
+.new{
+	margin-left: 20%;
+	margin-top: 20px;
+}
+/*图片部分*/
+.art2{
+	width: 60%;
+	margin-left: 20%;
+}
+.art2-div{
+	width: 48%;
+	margin-left: 1%;
+	display: inline-block;
+	font-size: 14px;
+	position: relative;
+	float: left;
+	overflow: hidden;
+}
+.art2-img{
+	width: 100%;
+	display: block;
+}
+.art2-til{
+	clear: both;
+	text-align: center;
+	font-size: 16px;
+	padding-top: 20px;
+}
+.art-til>span{
+	font-size: 22px;
+}
+.art2-til>img{
+	width: 120px;
+	display: block;
+	margin: 15px auto;
+}	
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px){
+.art{
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    padding-bottom: 40px;
+}
+.new{
+	width: 35%;
+	margin-left: 20%;
+	margin-top: 20px;
+}
+/*图片部分*/
+.art2{
+	width: 60%;
+	margin-left: 20%;
+}
+.art2-div{
+	width: 48%;
+	margin-left: 1%;
+	display: inline-block;
+	font-size: 14px;
+	position: relative;
+	float: left;
+	overflow: hidden;
+}
+.art2-img{
+	width: 100%;
+	display: block;
+}
+.art2-til{
+	clear: both;
+	text-align: center;
+	font-size: 16px;
+	padding-top: 20px;
+}
+.art-til>span{
+	font-size: 22px;
+}
+.art2-til>img{
+	width: 120px;
+	display: block;
+	margin: 15px auto;
+}	
+}
+
+
+@media screen and (max-width: 600px){
+.art{
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    padding-bottom: 40px;
+}
+.new{
+	width: 35%;
+	margin-left: 20%;
+	margin-top: 20px;
+}
+/*图片部分*/
+.art2{
+	width: 90%;
+	margin-left: 5%;
+}
+.art2-div{
+	width: 100%;
+	margin-bottom: 10px;
+	display: inline-block;
+	font-size: 14px;
+	position: relative;
+	float: left;
+	overflow: hidden;
+}
+.art2-img{
+	width: 100%;
+	display: block;
+}
+.art2-til{
+	clear: both;
+	text-align: center;
+	font-size: 16px;
+	padding-top: 20px;
+}
+.art-til>span{
+	font-size: 22px;
+}
+.art2-til>img{
+	width: 120px;
+	display: block;
+	margin: 15px auto;
+}	
+}
+
+
+
+
+.art0{
+	width: 90%;
+	margin-left: 5%;
+	position: relative;
+	margin-bottom:25px;
+}
+.art0-title{
+	font-size: 20px;
+	color: #000;
+	padding-top: 40px;
+}
+.date{
+	width: 60% !important;
+	margin-left: 20%;
+	color: #000;
+	margin-bottom: 40px !important;
+	padding-bottom: 20px;
+	border-bottom: solid 1px #ccc;
+}
+.line{
+   line-height: 20px;
+   margin-top: 35px;
+}
+.line>span{
+	width: 20%;
+	display: inline-block;
+	border-bottom: dashed 1px #666;
+	margin-bottom:5px;
+}
+.art0>p{
+	width:100%;
+	margin-bottom: 10px;
+	text-align: center;
+}
+.footer{
+	width: 100%;
+	line-height: 50px;
+	background-color: #081742;
+	background-size: 100% 100%;
+	color: #fff;
+	text-align: center;
+}
+.footer>span{
+	font-size: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+
+
+
+
+/*页码*/
+#pageGro{
+	width: 60%;
+	margin-left: 19%;
+	text-align: right;
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
+.pageList ul{
+	list-style-type: none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+.pageList{
+	display: inline-block;
+}
+.pageList li{
+   display: inline-block;
+   width: 25px;
+   line-height: 25px;
+   text-align: center;
+}
+.pageUp{
+	display: inline;
+	margin-top: 4px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.pageUp img{
+	display: inline;
+}
+.pageDown{
+	display: inline;
+	margin-top: 4px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.pagebg{
+	background-color: #02153d;
+	color: #fff;
+	border-radius: 50%;
+}
+.pagesum{
+	display: inline-block;
+}

@@ -42,7 +42,8 @@
 
 	<!-- 配置静态资源，直接映射到对应的文件夹，DispatcherServlet 不处理 -->
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
-	
+	<mvc:resources mapping="/front/**" location="/WEB-INF/frontResoures/" />
+
 	<!-- 网站图标，注意 ！favicon.ico 放在 webapp 目录 -->
 	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" />
 	
@@ -53,17 +54,53 @@
 	<bean id="kissoInit" class="com.baomidou.kisso.web.WebKissoConfigurer" init-method="initKisso">
 		<property name="ssoPropPath" value="properties/sso.properties" />
 	</bean>
-	
+
 	<mvc:interceptors>
 		<!-- SSO 拦截器 -->
 		<!-- path 对所有的请求拦截使用/**，对某个模块下的请求拦截使用：/myPath/* -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/front/**" />
+            <!--<mvc:exclude-mapping path="/**/*.html"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.js"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.css"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.jpg"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.gif"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.png"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.ico"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.htm"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.eot"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.svg"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.ttf"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.woff"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.doc"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.docx"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.xlsx"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.pdf"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.ppt"/>-->
 			<bean class="com.baomidou.kisso.web.interceptor.SSOSpringInterceptor" />
 		</mvc:interceptor>
 		<!-- 权限拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/front/**" />
+            <!--<mvc:exclude-mapping path="/**/*.html"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.js"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.css"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.jpg"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.gif"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.png"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.ico"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.htm"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.eot"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.svg"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.ttf"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.woff"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.doc"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.docx"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.xlsx"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.pdf"/>-->
+            <!--<mvc:exclude-mapping path="/**/*.ppt"/>-->
 			<bean class="com.baomidou.kisso.web.interceptor.SSOPermissionInterceptor">
 				<property name="authorization">
 					<bean class="com.baomidou.springwind.service.impl.PermissionServiceImpl"/>

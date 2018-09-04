@@ -1,0 +1,230 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+html,body{
+    position:relative;
+    height:100%;
+    min-height:100%;
+}
+body{
+	font-size: 14px;
+	font-family: "微软雅黑";
+	background-color: #fafafa;
+}
+a{
+	text-decoration: none;
+}	
+.conter{
+	width: 100%;
+	height: 100%;
+	background-image: url(../images/guanyu-bg.jpg);
+	background-position:center center;
+	position: relative;
+}
+.btn{
+	position: absolute;
+	right: 40px;
+	top: 40px;
+	cursor: pointer;
+}
+.nav{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.9);
+	position: relative;
+	z-index: 10;
+	display: none;
+}
+.nav ul{
+	width: 100%;
+	height: 95%;
+	padding-top: 5%;
+	display: block;
+    list-style-type: none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+.nav li{
+	display: block;
+	width: 100%;
+	height: 12%;
+	text-align: center;
+}
+.nav ul li a{
+	display:block;
+	width: 50%;
+	margin-left: 25%;
+	height: 50%;
+	text-align: center;
+	color: #fff;
+	font-size: 22px;
+}
+.nav>a{
+	position: absolute;
+	top: 40px;
+	right: 40px;
+	cursor: pointer;
+}
+
+.logo{
+	margin-left: 10px;
+	margin-top: 20px;
+}
+/*大于1000*/
+@media screen and (min-width: 1001px){
+.logo{
+	width: 200px !important;
+	position: absolute;
+}
+/*联系我们*/
+.art{
+	width: 40%;
+	background-color: rgba(0,0,0,0.5);
+	position: absolute;
+	left: 30%;
+	top: 0px;
+}
+.art1{
+	width: 60%;
+	margin-left: 20%;
+	margin-top: 5%;
+	display: block;
+}
+.art2{
+	width: 30px;
+	display: block;
+	margin: 15px auto;
+}
+.art3{
+	width:80%;
+	margin-left: 10%;
+	position: relative;
+	margin-bottom: 10%;
+	margin-top: 5%;
+	color: #fff;
+	line-height: 25px;
+	text-align:Justify;
+    text-justify:inter-ideograph;
+}
+}
+
+
+@media screen and (min-width: 601px) and (max-width: 1000px){
+.logo{
+	width: 200px !important;
+	margin-left: 15px;
+	margin-top: 15px;
+	position: absolute;
+}
+/*联系我们*/
+.art{
+	width: 80%;
+	background-color: rgba(0,0,0,0.5);
+	position: absolute;
+	left: 10%;
+	top: 0px;
+}
+.art1{
+	width: 60%;
+	margin-left: 20%;
+	margin-top: 5%;
+	display: block;
+}
+.art2{
+	width: 30px;
+	display: block;
+	margin: 15px auto;
+}
+.art3{
+	width:80%;
+	margin-left: 10%;
+	position: relative;
+	margin-bottom: 5%;
+	color: #fff;
+	line-height: 25px;
+	text-align:Justify;
+    text-justify:inter-ideograph;
+}
+}
+
+@media screen and (max-width: 600px){
+.conter{
+	width: 100%;
+	height: 100%;
+	background-image: url(../images/guanyu-bg1.jpg);
+	background-size:100% 100%;
+	position: relative;
+}
+.logo{
+	width: 30% !important;
+	position: absolute;
+	margin-left: 15px;
+	margin-top: 15px;
+}
+.btn{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+.del>img{
+	width: 25px;
+}
+/*联系我们*/
+.art{
+	width: 100%;
+	background-color: rgba(0,0,0,0) !important; 
+	position: absolute;
+	left: 0%;
+	top: 0px;
+}
+.art1{
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 50%;
+	display: block;
+}
+.art2{
+	width: 30px;
+	display: block;
+	margin: 15px auto;
+}
+.art3{
+	width:80%;
+	margin-left: 10%;
+	position: relative;
+	margin-bottom: 5%;
+	color: #fff;
+	line-height: 25px;
+	text-align:Justify;
+    text-justify:inter-ideograph;
+}
+.footer{
+	width: 100%;
+	line-height: 50px;
+	background-image: none !important;
+	background-color: #091327 !important;
+	background-position:center center;
+	color: #fff;
+	text-align: center;
+}
+}
+
+
+.footer{
+	width: 100%;
+	line-height: 50px;
+	background-image: url(../images/guanyu-footer.png);
+	background-position:center center;
+	color: #fff;
+	text-align: center;
+}
+.footer>span{
+	font-size: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
