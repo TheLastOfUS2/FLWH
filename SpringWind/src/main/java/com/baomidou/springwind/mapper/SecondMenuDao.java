@@ -1,11 +1,13 @@
 package com.baomidou.springwind.mapper;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.springwind.entity.SecondMenu;
+import com.baomidou.springwind.entity.ext.SecondMenuExt;
 
-public interface SecondMenuDao {
+import java.util.List;
+
+public interface SecondMenuDao extends BaseMapper<SecondMenu> {
     int deleteByPrimaryKey(String secondMenuId);
-
-    int insert(SecondMenu record);
 
     int insertSelective(SecondMenu record);
 
@@ -14,4 +16,6 @@ public interface SecondMenuDao {
     int updateByPrimaryKeySelective(SecondMenu record);
 
     int updateByPrimaryKey(SecondMenu record);
+
+    List<SecondMenuExt> selectAll();
 }

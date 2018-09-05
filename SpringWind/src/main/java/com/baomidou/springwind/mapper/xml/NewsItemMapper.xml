@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.baomidou.springwind.mapper.NewsItemDao" >
   <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.NewsItem" >
-    <id column="news_item_id" property="newsItemId" jdbcType="VARCHAR" />
-    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
-    <result column="title_text" property="titleText" jdbcType="VARCHAR" />
-    <result column="title_image" property="titleImage" jdbcType="VARCHAR" />
-    <result column="describe_text" property="describeText" jdbcType="VARCHAR" />
+    <id column="newsItemId" property="newsItemId" jdbcType="VARCHAR" />
+    <result column="insertTime" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="titleText" property="titleText" jdbcType="VARCHAR" />
+    <result column="titleImage" property="titleImage" jdbcType="VARCHAR" />
+    <result column="describeText" property="describeText" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     news_item_id, insert_time, title_text, title_image, describe_text
@@ -15,15 +15,15 @@
     select 
     <include refid="Base_Column_List" />
     from news_item
-    where news_item_id = #{newsItemId,jdbcType=VARCHAR}
+    where newsItemId = #{newsItemId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from news_item
-    where news_item_id = #{newsItemId,jdbcType=VARCHAR}
+    where newsItemId = #{newsItemId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.baomidou.springwind.entity.NewsItem" >
-    insert into news_item (news_item_id, insert_time, title_text, 
-      title_image, describe_text)
+    insert into news_item (newsItemId, insertTime, titleText,
+      titleImage, describeText)
     values (#{newsItemId,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{titleText,jdbcType=VARCHAR}, 
       #{titleImage,jdbcType=VARCHAR}, #{describeText,jdbcType=VARCHAR})
   </insert>
@@ -84,10 +84,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.baomidou.springwind.entity.NewsItem" >
     update news_item
-    set insert_time = #{insertTime,jdbcType=TIMESTAMP},
-      title_text = #{titleText,jdbcType=VARCHAR},
-      title_image = #{titleImage,jdbcType=VARCHAR},
-      describe_text = #{describeText,jdbcType=VARCHAR}
-    where news_item_id = #{newsItemId,jdbcType=VARCHAR}
+    set insertTime = #{insertTime,jdbcType=TIMESTAMP},
+      titleText = #{titleText,jdbcType=VARCHAR},
+      titleImage = #{titleImage,jdbcType=VARCHAR},
+      describeText = #{describeText,jdbcType=VARCHAR}
+    where newsItemId = #{newsItemId,jdbcType=VARCHAR}
   </update>
 </mapper>

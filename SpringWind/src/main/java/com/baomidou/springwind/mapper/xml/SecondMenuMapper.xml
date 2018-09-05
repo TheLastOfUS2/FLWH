@@ -2,34 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.baomidou.springwind.mapper.SecondMenuDao" >
   <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.SecondMenu" >
-    <id column="second_menu_id" property="secondMenuId" jdbcType="VARCHAR" />
-    <result column="title_one" property="titleOne" jdbcType="VARCHAR" />
-    <result column="title_two" property="titleTwo" jdbcType="VARCHAR" />
-    <result column="title_three" property="titleThree" jdbcType="VARCHAR" />
-    <result column="describe_one" property="describeOne" jdbcType="VARCHAR" />
-    <result column="describe_two" property="describeTwo" jdbcType="VARCHAR" />
-    <result column="describe_three" property="describeThree" jdbcType="VARCHAR" />
-    <result column="image_id" property="imageId" jdbcType="VARCHAR" />
-    <result column="part_id" property="partId" jdbcType="VARCHAR" />
+    <id column="secondMenuId" property="secondMenuId" jdbcType="VARCHAR" />
+    <result column="titleOne" property="titleOne" jdbcType="VARCHAR" />
+    <result column="titleTwo" property="titleTwo" jdbcType="VARCHAR" />
+    <result column="titleThree" property="titleThree" jdbcType="VARCHAR" />
+    <result column="describeOne" property="describeOne" jdbcType="VARCHAR" />
+    <result column="describeTwo" property="describeTwo" jdbcType="VARCHAR" />
+    <result column="describeThree" property="describeThree" jdbcType="VARCHAR" />
+    <result column="imageId" property="imageId" jdbcType="VARCHAR" />
+    <result column="partId" property="partId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMapExt" type="com.baomidou.springwind.entity.ext.SecondMenuExt">
+    <id column="secondMenuId" property="secondMenuId" jdbcType="VARCHAR" />
+    <result column="partName" property="partName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    second_menu_id, title_one, title_two, title_three, describe_one, describe_two, describe_three, 
-    image_id, part_id
+    secondMenuId, titleOne, titleTwo, titleThree, describeOne, describeTwo, describeThree, 
+    imageId, partId
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from second_menu
-    where second_menu_id = #{secondMenuId,jdbcType=VARCHAR}
+    where secondMenuId = #{secondMenuId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <select id="selectAll" resultMap="BaseResultMapExt">
+      select secondMenuId,(select partValue from part where second_menu.partId = part.partId)as partName from second_menu;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from second_menu
-    where second_menu_id = #{secondMenuId,jdbcType=VARCHAR}
+    where secondMenuId = #{secondMenuId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.baomidou.springwind.entity.SecondMenu" >
-    insert into second_menu (second_menu_id, title_one, title_two, 
-      title_three, describe_one, describe_two, 
-      describe_three, image_id, part_id
+    insert into second_menu (secondMenuId, titleOne, titleTwo,
+      titleThree, describeOne, describeTwo,
+      describeThree, imageId, partId
       )
     values (#{secondMenuId,jdbcType=VARCHAR}, #{titleOne,jdbcType=VARCHAR}, #{titleTwo,jdbcType=VARCHAR}, 
       #{titleThree,jdbcType=VARCHAR}, #{describeOne,jdbcType=VARCHAR}, #{describeTwo,jdbcType=VARCHAR}, 
@@ -40,31 +47,31 @@
     insert into second_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="secondMenuId != null" >
-        second_menu_id,
+        secondMenuId,
       </if>
       <if test="titleOne != null" >
-        title_one,
+        titleOne,
       </if>
       <if test="titleTwo != null" >
-        title_two,
+        titleTwo,
       </if>
       <if test="titleThree != null" >
-        title_three,
+        titleThree,
       </if>
       <if test="describeOne != null" >
-        describe_one,
+        describeOne,
       </if>
       <if test="describeTwo != null" >
-        describe_two,
+        describeTwo,
       </if>
       <if test="describeThree != null" >
-        describe_three,
+        describeThree,
       </if>
       <if test="imageId != null" >
-        image_id,
+        imageId,
       </if>
       <if test="partId != null" >
-        part_id,
+        partId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -101,42 +108,42 @@
     update second_menu
     <set >
       <if test="titleOne != null" >
-        title_one = #{titleOne,jdbcType=VARCHAR},
+        titleOne = #{titleOne,jdbcType=VARCHAR},
       </if>
       <if test="titleTwo != null" >
-        title_two = #{titleTwo,jdbcType=VARCHAR},
+        titleTwo = #{titleTwo,jdbcType=VARCHAR},
       </if>
       <if test="titleThree != null" >
-        title_three = #{titleThree,jdbcType=VARCHAR},
+        titleThree = #{titleThree,jdbcType=VARCHAR},
       </if>
       <if test="describeOne != null" >
-        describe_one = #{describeOne,jdbcType=VARCHAR},
+        describeOne = #{describeOne,jdbcType=VARCHAR},
       </if>
       <if test="describeTwo != null" >
-        describe_two = #{describeTwo,jdbcType=VARCHAR},
+        describeTwo = #{describeTwo,jdbcType=VARCHAR},
       </if>
       <if test="describeThree != null" >
-        describe_three = #{describeThree,jdbcType=VARCHAR},
+        describeThree = #{describeThree,jdbcType=VARCHAR},
       </if>
       <if test="imageId != null" >
-        image_id = #{imageId,jdbcType=VARCHAR},
+        imageId = #{imageId,jdbcType=VARCHAR},
       </if>
       <if test="partId != null" >
-        part_id = #{partId,jdbcType=VARCHAR},
+        partId = #{partId,jdbcType=VARCHAR},
       </if>
     </set>
-    where second_menu_id = #{secondMenuId,jdbcType=VARCHAR}
+    where secondMenuId = #{secondMenuId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.baomidou.springwind.entity.SecondMenu" >
     update second_menu
-    set title_one = #{titleOne,jdbcType=VARCHAR},
-      title_two = #{titleTwo,jdbcType=VARCHAR},
-      title_three = #{titleThree,jdbcType=VARCHAR},
-      describe_one = #{describeOne,jdbcType=VARCHAR},
-      describe_two = #{describeTwo,jdbcType=VARCHAR},
-      describe_three = #{describeThree,jdbcType=VARCHAR},
-      image_id = #{imageId,jdbcType=VARCHAR},
-      part_id = #{partId,jdbcType=VARCHAR}
-    where second_menu_id = #{secondMenuId,jdbcType=VARCHAR}
+    set titleOne = #{titleOne,jdbcType=VARCHAR},
+      titleTwo = #{titleTwo,jdbcType=VARCHAR},
+      titleThree = #{titleThree,jdbcType=VARCHAR},
+      describeOne = #{describeOne,jdbcType=VARCHAR},
+      describeTwo = #{describeTwo,jdbcType=VARCHAR},
+      describeThree = #{describeThree,jdbcType=VARCHAR},
+      imageId = #{imageId,jdbcType=VARCHAR},
+      partId = #{partId,jdbcType=VARCHAR}
+    where secondMenuId = #{secondMenuId,jdbcType=VARCHAR}
   </update>
 </mapper>

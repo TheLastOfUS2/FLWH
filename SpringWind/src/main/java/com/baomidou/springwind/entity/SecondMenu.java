@@ -1,6 +1,11 @@
 package com.baomidou.springwind.entity;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("second_menu")
 public class SecondMenu {
+    @TableId
     private String secondMenuId;
 
     private String titleOne;

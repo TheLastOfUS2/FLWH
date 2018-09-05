@@ -21,7 +21,7 @@
    		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:xml/mybatis-config.xml" />
 		<property name="typeAliasesPackage" value="com.baomidou.springwind.entity;com.baomidou.springwind.entity.vo" />
-		<property name="mapperLocations" value="classpath:com/baomidou/springwind/mapper/xml/*Mapper.xml" />
+		<property name="mapperLocations" value="classpath:com/baomidou/springwind/mapper/xml/*.xml" />
         <property name="plugins">
             <array>
                 <!-- 分页插件配置 -->
@@ -30,11 +30,16 @@
 			    </bean>
             </array>
         </property>
-    </bean>
+		<property name="globalConfig" ref="globalConfig" />
+	</bean>
     
     <!-- 加载 mapper.xml 接口 配置文件 -->
 	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.baomidou.springwind.mapper" />
+	</bean>
+	<bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+		<!--<property name="idType" value="2" />-->
+		<!--<property name="dbColumnUnderline" value="true" />-->
 	</bean>
 
 </beans>

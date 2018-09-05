@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.baomidou.springwind.mapper.ImageDao" >
   <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.Image" >
-    <id column="image_id" property="imageId" jdbcType="VARCHAR" />
-    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
-    <result column="image_describe" property="imageDescribe" jdbcType="VARCHAR" />
-    <result column="item_id" property="itemId" jdbcType="VARCHAR" />
+    <id column="imageId" property="imageId" jdbcType="VARCHAR" />
+    <result column="imageUrl" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="imageDescribe" property="imageDescribe" jdbcType="VARCHAR" />
+    <result column="itemId" property="itemId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     image_id, image_url, image_describe, item_id
@@ -14,15 +14,15 @@
     select 
     <include refid="Base_Column_List" />
     from image
-    where image_id = #{imageId,jdbcType=VARCHAR}
+    where imageId = #{imageId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from image
-    where image_id = #{imageId,jdbcType=VARCHAR}
+    where imageId = #{imageId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.baomidou.springwind.entity.Image" >
-    insert into image (image_id, image_url, image_describe, 
-      item_id)
+    insert into image (imageId, imageUrl, imageDescribe,
+      itemId)
     values (#{imageId,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{imageDescribe,jdbcType=VARCHAR}, 
       #{itemId,jdbcType=VARCHAR})
   </insert>
@@ -74,9 +74,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.baomidou.springwind.entity.Image" >
     update image
-    set image_url = #{imageUrl,jdbcType=VARCHAR},
-      image_describe = #{imageDescribe,jdbcType=VARCHAR},
-      item_id = #{itemId,jdbcType=VARCHAR}
-    where image_id = #{imageId,jdbcType=VARCHAR}
+    set imageUrl = #{imageUrl,jdbcType=VARCHAR},
+      imageDescribe = #{imageDescribe,jdbcType=VARCHAR},
+      itemId = #{itemId,jdbcType=VARCHAR}
+    where imageId = #{imageId,jdbcType=VARCHAR}
   </update>
 </mapper>
