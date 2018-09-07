@@ -1,7 +1,12 @@
 package com.baomidou.springwind.entity;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("service_item")
 public class ServiceItem {
-    private String serviceItemId;
+    @TableId
+    private int serviceItemId;
 
     private String titleImage;
 
@@ -13,12 +18,14 @@ public class ServiceItem {
 
     private String serviceType;
 
-    public String getServiceItemId() {
+    private String insertTime;
+
+    public int getServiceItemId() {
         return serviceItemId;
     }
 
-    public void setServiceItemId(String serviceItemId) {
-        this.serviceItemId = serviceItemId == null ? null : serviceItemId.trim();
+    public void setServiceItemId(int serviceItemId) {
+        this.serviceItemId = serviceItemId;
     }
 
     public String getTitleImage() {
@@ -59,5 +66,26 @@ public class ServiceItem {
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType == null ? null : serviceType.trim();
+    }
+
+    public String getInsertTime() {
+        return insertTime;
+    }
+
+    public void setInsertTime(String insertTime) {
+        this.insertTime = insertTime == null ? null : insertTime.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceItem{" +
+                "serviceItemId='" + serviceItemId + '\'' +
+                ", titleImage='" + titleImage + '\'' +
+                ", titleText='" + titleText + '\'' +
+                ", describeText='" + describeText + '\'' +
+                ", describeImage='" + describeImage + '\'' +
+                ", serviceType='" + serviceType + '\'' +
+                ", insertTime='" + insertTime + '\'' +
+                '}';
     }
 }
