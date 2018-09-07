@@ -38,13 +38,22 @@ public class SecondMenuController extends BaseController {
     @ResponseBody
     @Permission("1003")
     @RequestMapping("/getSecondMenuList")
-    public String getUserList() {
+    public String getSecondMenuList() {
         Page<SecondMenu> page = getPage();
         page = secondMenuService.selectPage(page, null);
         List<SecondMenuExt> secondMenuExts = secondMenuService.selectAll();
         Page<SecondMenuExt> secondMenuExtPage = getPage();
         secondMenuExtPage.setRecords(secondMenuExts);
+        secondMenuExtPage.setTotal(page.getTotal());
+        secondMenuExtPage.setSize(page.getSize());
+        secondMenuExtPage.setCurrent(page.getPages());
         secondMenuExtPage.setCondition(page.getCondition());
         return jsonPage(secondMenuExtPage);
+    }
+
+    @Permission("1003")
+    @RequestMapping("/edit")
+    public String edit(Model model) {
+        return "/secondMenu/edit";
     }
 }

@@ -36,7 +36,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
 	<!-- 检测开发环境，/druid/index.html -->
@@ -58,10 +58,10 @@
 		<error-code>404</error-code>
 		<location>/error/404.html</location>
 	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/error/500.html</location>
-	</error-page>
+	<!--<error-page>-->
+		<!--<error-code>500</error-code>-->
+		<!--<location>/error/500.html</location>-->
+	<!--</error-page>-->
 
 	<!-- 欢迎界面 -->
 	<welcome-file-list>
