@@ -1,12 +1,16 @@
 package com.baomidou.springwind.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+
+import java.util.Date;
+import java.util.List;
 
 @TableName("service_item")
 public class ServiceItem {
     @TableId
-    private int serviceItemId;
+    private String serviceItemId;
 
     private String titleImage;
 
@@ -20,12 +24,15 @@ public class ServiceItem {
 
     private String insertTime;
 
-    public int getServiceItemId() {
+    @TableField(exist = false)
+    private List<Image> imageList;
+
+    public String getServiceItemId() {
         return serviceItemId;
     }
 
-    public void setServiceItemId(int serviceItemId) {
-        this.serviceItemId = serviceItemId;
+    public void setServiceItemId(String serviceItemId) {
+        this.serviceItemId = serviceItemId == null ? null : serviceItemId.trim();
     }
 
     public String getTitleImage() {
@@ -74,6 +81,14 @@ public class ServiceItem {
 
     public void setInsertTime(String insertTime) {
         this.insertTime = insertTime == null ? null : insertTime.trim();
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 
     @Override

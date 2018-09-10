@@ -1,106 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.baomidou.springwind.mapper.ServiceItemDao" >
-  <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.ServiceItem" >
-    <id column="serviceItemId" property="serviceItemId" jdbcType="VARCHAR" />
-    <result column="titleImage" property="titleImage" jdbcType="VARCHAR" />
-    <result column="titleText" property="titleText" jdbcType="VARCHAR" />
-    <result column="describeText" property="describeText" jdbcType="VARCHAR" />
-    <result column="describeImage" property="describeImage" jdbcType="VARCHAR" />
-    <result column="serviceType" property="serviceType" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    service_item_id, title_image, title_text, describe_text, describe_image, service_type
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from service_item
-    where serviceItemId = #{serviceItemId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from service_item
-    where serviceItemId = #{serviceItemId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.baomidou.springwind.entity.ServiceItem" >
-    insert into service_item (serviceItemId, titleImage, titleText,
-      describeText, describeImage, serviceType
-      )
-    values (#{serviceItemId,jdbcType=VARCHAR}, #{titleImage,jdbcType=VARCHAR}, #{titleText,jdbcType=VARCHAR}, 
-      #{describeText,jdbcType=VARCHAR}, #{describeImage,jdbcType=VARCHAR}, #{serviceType,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.baomidou.springwind.entity.ServiceItem" >
-    insert into service_item
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="serviceItemId != null" >
-        service_item_id,
-      </if>
-      <if test="titleImage != null" >
-        title_image,
-      </if>
-      <if test="titleText != null" >
-        title_text,
-      </if>
-      <if test="describeText != null" >
-        describe_text,
-      </if>
-      <if test="describeImage != null" >
-        describe_image,
-      </if>
-      <if test="serviceType != null" >
-        service_type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="serviceItemId != null" >
-        #{serviceItemId,jdbcType=VARCHAR},
-      </if>
-      <if test="titleImage != null" >
-        #{titleImage,jdbcType=VARCHAR},
-      </if>
-      <if test="titleText != null" >
-        #{titleText,jdbcType=VARCHAR},
-      </if>
-      <if test="describeText != null" >
-        #{describeText,jdbcType=VARCHAR},
-      </if>
-      <if test="describeImage != null" >
-        #{describeImage,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceType != null" >
-        #{serviceType,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.baomidou.springwind.entity.ServiceItem" >
-    update service_item
-    <set >
-      <if test="titleImage != null" >
-        title_image = #{titleImage,jdbcType=VARCHAR},
-      </if>
-      <if test="titleText != null" >
-        title_text = #{titleText,jdbcType=VARCHAR},
-      </if>
-      <if test="describeText != null" >
-        describe_text = #{describeText,jdbcType=VARCHAR},
-      </if>
-      <if test="describeImage != null" >
-        describe_image = #{describeImage,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceType != null" >
-        service_type = #{serviceType,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where service_item_id = #{serviceItemId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.baomidou.springwind.entity.ServiceItem" >
-    update service_item
-    set titleImage = #{titleImage,jdbcType=VARCHAR},
-      titleText = #{titleText,jdbcType=VARCHAR},
-      describeText = #{describeText,jdbcType=VARCHAR},
-      describeImage = #{describeImage,jdbcType=VARCHAR},
-      serviceType = #{serviceType,jdbcType=VARCHAR}
-    where serviceItemId = #{serviceItemId,jdbcType=VARCHAR}
-  </update>
+<mapper namespace="com.baomidou.springwind.mapper.ServiceItemDao">
+    <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.ServiceItem">
+        <id column="serviceItemId" property="serviceItemId" jdbcType="VARCHAR"/>
+        <result column="titleImage" property="titleImage" jdbcType="VARCHAR"/>
+        <result column="titleText" property="titleText" jdbcType="VARCHAR"/>
+        <result column="describeText" property="describeText" jdbcType="VARCHAR"/>
+        <result column="describeImage" property="describeImage" jdbcType="VARCHAR"/>
+        <result column="serviceType" property="serviceType" jdbcType="VARCHAR"/>
+        <collection property="imageList" ofType="Image">
+            <id column="imageId" property="imageId"/>
+            <result column="imageUrl" property="imageUrl"/>
+            <result column="imageDescribe" property="imageDescribe"/>
+            <result column="itemId" property="itemId"/>
+        </collection>
+    </resultMap>
+    <select id="selectByServiceItemId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        serviceItemId,titleImage,titleText,describeImage,describeText,serviceType,imageId,imageUrl,imageDescribe,itemId
+        from service_item,image
+        where serviceItemId = #{id,jdbcType=VARCHAR} and serviceItemId = itemId
+    </select>
 </mapper>
