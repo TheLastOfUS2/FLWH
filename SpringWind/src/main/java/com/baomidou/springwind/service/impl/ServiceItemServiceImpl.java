@@ -11,5 +11,11 @@ import java.util.List;
 
 @Service
 public class ServiceItemServiceImpl extends BaseServiceImpl<ServiceItemDao,ServiceItem> implements ServiceItemService {
+    @Autowired
+    private ServiceItemDao serviceItemDao;
 
+    @Override
+    public ServiceItem selectByServiceItemId(String id) {
+        return serviceItemDao.selectByServiceItemId(id);
+    }
 }

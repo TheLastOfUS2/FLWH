@@ -1,6 +1,11 @@
 package com.baomidou.springwind.entity;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("image")
 public class Image {
+    @TableId
     private String imageId;
 
     private String imageUrl;

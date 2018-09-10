@@ -964,7 +964,7 @@
     </column>
     <column id="244" parent="232" name="imageUrl">
       <Position>2</Position>
-      <DataType>varchar(36)|0s</DataType>
+      <DataType>varchar(72)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="245" parent="232" name="imageDescribe">
@@ -1220,14 +1220,13 @@
     </key>
     <column id="287" parent="239" name="serviceItemId">
       <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="288" parent="239" name="titleImage">
       <Position>2</Position>
-      <DataType>varchar(36)|0s</DataType>
+      <DataType>varchar(72)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="289" parent="239" name="titleText">
@@ -1242,7 +1241,7 @@
     </column>
     <column id="291" parent="239" name="describeImage">
       <Position>5</Position>
-      <DataType>varchar(36)|0s</DataType>
+      <DataType>varchar(72)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="292" parent="239" name="serviceType">
@@ -1252,8 +1251,11 @@
     </column>
     <column id="293" parent="239" name="insertTime">
       <Position>7</Position>
-      <DataType>timestamp|0s</DataType>
+      <DataType>timestamp(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP(6)</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
+      <OnUpdate>CURRENT_TIMESTAMP(6)</OnUpdate>
     </column>
     <key id="294" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
