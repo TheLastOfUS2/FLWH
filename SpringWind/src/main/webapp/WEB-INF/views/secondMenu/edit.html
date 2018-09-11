@@ -21,25 +21,25 @@
     </script>
 </head>
 <body class="white-bg">
-<div class="ibox-content" style="width: 430px;">
+<div class="ibox-content" style="width: 800px;">
    <form id="myForm" class="form-horizontal" autocomplete="off" data-validator-option="{theme:'default'}">
        <input type="hidden" name="secondMenuId" value="$!{secondMenu.secondMenuId}">
        <div class="form-group">
-           <label class="col-sm-2 control-label">二级菜单名</label>
-           <div class="col-sm-10">
+           <label class="col-md-3 control-label">二级菜单名</label>
+           <div class="col-md-9">
                <input id="secondName" type="text" class="form-control"  name="secondName"  value="$!{secondMenu.partName}" readonly>
            </div>
        </div>
        <div class="form-group">
-           <label  class="col-sm-2 control-label">背景图片</label>
-           <div class="col-sm-10">
+           <label  class="col-md-3 control-label">背景图片</label>
+           <div class="col-md-9">
                <input id="myFile" type="file" name="myFile" class="fileloading">
            </div>
            <input type="hidden" name="backgroundImg" id="backgroundImg"  value="$!{secondMenu.backgroundImg}">
        </div>
        <div class="form-group">
-           <label  class="col-md-2 control-label">二级菜单介绍</label>
-           <div class="col-md-10">
+           <label  class="col-md-3 control-label">二级菜单介绍</label>
+           <div class="col-md-9">
                <script id="content" type="text/plain"></script>
            </div>
            <input name="editText" type="hidden" id="editText">
