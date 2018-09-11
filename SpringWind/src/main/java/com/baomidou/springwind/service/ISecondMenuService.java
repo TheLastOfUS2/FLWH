@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ISecondMenuService extends IService<SecondMenu> {
     List<SecondMenuExt> selectAll();
+
+    SecondMenuExt selectByIdMy(String id);
 }

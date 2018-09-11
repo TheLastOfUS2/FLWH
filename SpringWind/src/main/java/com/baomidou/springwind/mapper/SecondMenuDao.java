@@ -18,4 +18,6 @@ public interface SecondMenuDao extends BaseMapper<SecondMenu> {
     int updateByPrimaryKey(SecondMenu record);
 
     List<SecondMenuExt> selectAll();
+
+    SecondMenuExt selectById(String secondMenuId);
 }
