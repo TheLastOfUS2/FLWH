@@ -30,8 +30,6 @@ public class ServiceItemController extends BaseController {
 
     private ServiceItem serviceItem1 = new ServiceItem();
 
-    private String url = "C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF";
-
     //跳转list
     @Permission("1004")
     @RequestMapping("/list")
@@ -86,14 +84,18 @@ public class ServiceItemController extends BaseController {
     @RequestMapping("/delServiceItem/{serviceItemId}")
     public String delServiceItem(@PathVariable String serviceItemId) {
         ServiceItem serviceItem = serviceItemService.selectByServiceItemId(serviceItemId);
+        if (serviceItem == null) {
+            serviceItem = serviceItemService.selectById(serviceItemId);
+        } else {
+            for (Image i : serviceItem.getImageList()) {
+                String imageUrl = i.getImageUrl();
+                deleteFile("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF" + imageUrl);
+            }
+        }
+        deleteFile("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF" + serviceItem.getTitleImage());
+        deleteFile("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF" + serviceItem.getDescribeImage());
         serviceItemService.deleteById(serviceItemId);
         imageService.deleteByItemId(serviceItemId);
-        deleteFile(url + serviceItem.getTitleImage());
-        deleteFile(url + serviceItem.getDescribeImage());
-        for (Image i : serviceItem.getImageList()) {
-            String imageUrl = i.getImageUrl();
-            deleteFile(url + imageUrl);
-        }
         return Boolean.TRUE.toString();
     }
 
@@ -130,7 +132,7 @@ public class ServiceItemController extends BaseController {
      */
     private String uploadFile(HttpServletRequest request, String dstFileName) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File(url);
+        File fileUploadPath = new File("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image");
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();
@@ -158,7 +160,7 @@ public class ServiceItemController extends BaseController {
      */
     private void uploadImage(HttpServletRequest request, String dstFileName, String serviceItemId) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File(url);
+        File fileUploadPath = new File("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image");
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();

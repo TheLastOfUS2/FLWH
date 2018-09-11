@@ -127,10 +127,6 @@
                     return data;
                 }
             });
-            //导入文件上传完成之后的事件
-            $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-
-            });
         };
         return oFile;
     };
@@ -165,10 +161,6 @@
                     };
                     return data;
                 }
-            });
-            //导入文件上传完成之后的事件
-            $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-
             });
         };
         return oFile;
@@ -205,10 +197,6 @@
                     return data;
                 }
             });
-            //导入文件上传完成之后的事件
-            $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-                window.parent.location.reload();
-            });
         };
         return oFile;
     };
@@ -237,6 +225,7 @@
                         $('#titleImage').fileinput('upload');
                         $('#describeImage').fileinput('upload');
                         $('#image').fileinput('upload');
+                        window.parent.location.reload();
                     }
                 }
             });
