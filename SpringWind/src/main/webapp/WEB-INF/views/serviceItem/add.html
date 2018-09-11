@@ -11,30 +11,6 @@
     <script src="#springUrl('/static/js/fileinput.min.js')"></script>
     <script src="#springUrl('/static/js/locales/zh.js')"></script>
     <script src="#springUrl('/static/plugins/nice-validator-0.8.1/jquery.validator.js?local=zh-CN')"></script>
-    <style type="text/css">
-        .file-box {
-            position: relative;
-            display: inline-block;
-        }
-        .file-box img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            position: absolute;
-            top: -30px;
-            left: 0;
-            display: inline-block;
-            border: none;
-        }
-        .file-box .txt,.file-box .file {
-            width: 70px;
-            height: 36px;
-            position: absolute;
-            top: -20px;
-            left: 100px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body class="white-bg">
 <div class="ibox-content" style="width: 600px;">
@@ -116,12 +92,6 @@
             </div>
         </div>
     </form>
-
-    <div class="file-box">
-        <img id="preview" />
-        <input type="text" id="imgfield" class="txt" placeholder="预览">
-        <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange="imgPreview(this)" >
-    </div>
 </div>
 
 <script type="text/javascript">
@@ -143,7 +113,6 @@
                 maxFileCount: 1,                                       //表示允许同时上传的最大文件个数
                 enctype: 'multipart/form-data',
                 previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                required: true,
                 msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
                 layoutTemplates: {
                     // actionDrag: '',
@@ -160,8 +129,7 @@
             });
             //导入文件上传完成之后的事件
             $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-                //报告table刷新
-                console.log("1");
+
             });
         };
         return oFile;
@@ -183,7 +151,6 @@
                 maxFileSize: 2000,                                       //单位为kb，如果为0表示不限制文件大小
                 maxFileCount: 1,                                       //表示允许同时上传的最大文件个数
                 enctype: 'multipart/form-data',
-                required: true,
                 previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
                 msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
                 layoutTemplates: {
@@ -201,8 +168,7 @@
             });
             //导入文件上传完成之后的事件
             $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-                //报告table刷新
-                console.log("1");
+
             });
         };
         return oFile;
@@ -224,7 +190,6 @@
                 maxFileSize: 2000,                                       //单位为kb，如果为0表示不限制文件大小
                 maxFileCount: 10,                                       //表示允许同时上传的最大文件个数
                 enctype: 'multipart/form-data',
-                required: true,
                 previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
                 msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
                 layoutTemplates: {
@@ -242,37 +207,11 @@
             });
             //导入文件上传完成之后的事件
             $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-                //报告table刷新
-                console.log("1");
+                window.parent.location.reload();
             });
         };
         return oFile;
     };
-
-    function imgPreview(fileDom) {
-        //判断是否支持FileReader
-        if(window.FileReader) {
-            var reader = new FileReader();
-        } else {
-            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
-        }
-        //获取文件
-        var file = fileDom.files[0];
-        var imageType = /^image\//;
-        //是否是图片
-        if(!imageType.test(file.type)) {
-            alert("请选择图片！");
-            return;
-        }
-        //读取完成
-        reader.onload = function(e) {
-            //获取图片dom
-            var img = document.getElementById("preview");
-            //图片路径设置为读取的图片
-            img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
 
     var titleImage = new TitleInput();
     var describeImage = new DescribeInput();
@@ -293,6 +232,7 @@
                 type: "POST",
                 success: function (data) {
                     $('#serviceItemId').attr("value", data.serviceItemId);
+                    console.log(data);
                     if (data) {
                         $('#titleImage').fileinput('upload');
                         $('#describeImage').fileinput('upload');

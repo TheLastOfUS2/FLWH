@@ -31,6 +31,8 @@ public class ServiceItemController extends BaseController {
     @Autowired
     private ImageService imageService;
 
+    ServiceItem serviceItem1 = new ServiceItem();
+
     //跳转list
     @Permission("1004")
     @RequestMapping("/list")
@@ -71,8 +73,10 @@ public class ServiceItemController extends BaseController {
     public ServiceItem editServiceItem(ServiceItem serviceItem) {
         if (serviceItem != null && serviceItem.getServiceItemId().equals("")) {
             serviceItem.setServiceItemId(UUID.randomUUID().toString());
+            serviceItem1.setServiceItemId(serviceItem.getServiceItemId());
             serviceItemService.insert(serviceItem);
         } else {
+            serviceItem1.setServiceItemId(serviceItem.getServiceItemId());
             serviceItemService.updateById(serviceItem);
         }
         return serviceItem;
@@ -86,7 +90,7 @@ public class ServiceItemController extends BaseController {
         ServiceItem serviceItem = new ServiceItem();
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
         String s = uploadFile(request, multipartHttpServletRequest.getParameter("name"));
-        serviceItem.setServiceItemId(multipartHttpServletRequest.getParameter("serviceItemId"));
+        serviceItem.setServiceItemId(serviceItem1.getServiceItemId());
         if (multipartHttpServletRequest.getParameter("name").equals("titleImage")) {
             serviceItem.setTitleImage("\\static\\image\\" + s);
         } else {
@@ -102,9 +106,7 @@ public class ServiceItemController extends BaseController {
     @RequestMapping(value = "/uploadImage", method = RequestMethod.POST)
     public String uploadImage(HttpServletRequest request, HttpServletResponse response) {
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-        System.out.println(multipartHttpServletRequest.getParameter("name"));
-        System.out.println(multipartHttpServletRequest.getParameter("serviceItemId"));
-        uploadImage(request, multipartHttpServletRequest.getParameter("name"), multipartHttpServletRequest.getParameter("serviceItemId"));
+        uploadImage(request, multipartHttpServletRequest.getParameter("name"), serviceItem1.getServiceItemId());
         return "1";
     }
 
