@@ -47,18 +47,19 @@ public class ServiceItemController extends BaseController {
         return jsonPage(serviceItemService.selectPage(serviceItemPage, null));
     }
 
+    //跳转添加
+    @Permission("1004")
+    @RequestMapping("/add")
+    public String add(Model model, String id) {
+        return "/serviceItem/add";
+    }
+
     //修改查询信息
     @Permission("1004")
     @RequestMapping("/edit")
     public String edit(Model model, String id) {
         if (id != null) {
             model.addAttribute("serviceItem", serviceItemService.selectByServiceItemId(id));
-            ServiceItem serviceItem = serviceItemService.selectByServiceItemId(id);
-            String a = null;
-            for (int i = 0; i < serviceItem.getImageList().size(); i++) {
-                a = a + "\\SpringWind"+serviceItem.getImageList().get(i).getImageUrl() + ",";
-            }
-            model.addAttribute("a", a);
         }
         return "/serviceItem/edit";
     }
@@ -67,14 +68,14 @@ public class ServiceItemController extends BaseController {
     @ResponseBody
     @Permission("1004")
     @RequestMapping(value = "/editServiceItem", method = RequestMethod.POST)
-    public String editServiceItem(ServiceItem serviceItem) {
+    public ServiceItem editServiceItem(ServiceItem serviceItem) {
         if (serviceItem != null && serviceItem.getServiceItemId().equals("")) {
             serviceItem.setServiceItemId(UUID.randomUUID().toString());
             serviceItemService.insert(serviceItem);
         } else {
             serviceItemService.updateById(serviceItem);
         }
-        return "1";
+        return serviceItem;
     }
 
     //图片上传

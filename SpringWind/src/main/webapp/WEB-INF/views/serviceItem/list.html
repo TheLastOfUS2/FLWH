@@ -88,9 +88,9 @@ SpringWind - 峰岚业务
 
     function editUser(id){
         var title = "新增用户";
-        var url = "#springUrl('/sys/serviceItem/edit.html')";
-        console.log(id);
+        var url = "#springUrl('/sys/serviceItem/add.html')";
         if(id!=null){
+            url = "#springUrl('/sys/serviceItem/edit.html')";
             title = "编辑用户";
             url = url + "?id=" + id;
         }
