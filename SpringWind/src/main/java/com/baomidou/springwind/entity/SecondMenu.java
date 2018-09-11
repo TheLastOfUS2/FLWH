@@ -24,6 +24,26 @@ public class SecondMenu {
 
     private String partId;
 
+    private String backgroundImg;
+
+    private String editText;
+
+    public String getEditText() {
+        return editText;
+    }
+
+    public void setEditText(String editText) {
+        this.editText = editText;
+    }
+
+    public String getBackgroundImg() {
+        return backgroundImg;
+    }
+
+    public void setBackgroundImg(String backgroundImg) {
+        this.backgroundImg = backgroundImg;
+    }
+
     public String getSecondMenuId() {
         return secondMenuId;
     }

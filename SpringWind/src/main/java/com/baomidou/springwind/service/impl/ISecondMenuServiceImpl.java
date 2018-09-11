@@ -21,4 +21,10 @@ public class ISecondMenuServiceImpl extends BaseServiceImpl<SecondMenuDao,Second
         List<SecondMenuExt> secondMenuExts = secondMenuDao.selectAll();
         return secondMenuExts;
     }
+
+    @Override
+    public SecondMenuExt selectByIdMy(String id) {
+        SecondMenuExt secondMenuExts = secondMenuDao.selectById(id);
+        return secondMenuExts;
+    }
 }
