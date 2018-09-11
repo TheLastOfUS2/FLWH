@@ -65,14 +65,14 @@ SpringWind - 峰岚业务
         };
     }
 
-    function delUser(userId) {
+    function delUser(serviceItemId) {
         //询问框
         layer.confirm('确定删除吗？', {
             btn: ['确定', '取消'] //按钮
         }, function () {
             $.ajax({
                 type: "POST",
-                url: "#springUrl('/perm/user/delUser/')" + userId,
+                url: "#springUrl('/sys/serviceItem/delServiceItem/')" + serviceItemId,
                 datatype: "text",
                 success: function (data) {
                     if(data == 'true'){

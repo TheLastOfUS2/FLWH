@@ -10,10 +10,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -31,7 +28,9 @@ public class ServiceItemController extends BaseController {
     @Autowired
     private ImageService imageService;
 
-    ServiceItem serviceItem1 = new ServiceItem();
+    private ServiceItem serviceItem1 = new ServiceItem();
+
+    private String url = "C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF";
 
     //跳转list
     @Permission("1004")
@@ -82,6 +81,22 @@ public class ServiceItemController extends BaseController {
         return serviceItem;
     }
 
+    @ResponseBody
+    @Permission("1004")
+    @RequestMapping("/delServiceItem/{serviceItemId}")
+    public String delServiceItem(@PathVariable String serviceItemId) {
+        ServiceItem serviceItem = serviceItemService.selectByServiceItemId(serviceItemId);
+        serviceItemService.deleteById(serviceItemId);
+        imageService.deleteByItemId(serviceItemId);
+        deleteFile(url + serviceItem.getTitleImage());
+        deleteFile(url + serviceItem.getDescribeImage());
+        for (Image i : serviceItem.getImageList()) {
+            String imageUrl = i.getImageUrl();
+            deleteFile(url + imageUrl);
+        }
+        return Boolean.TRUE.toString();
+    }
+
     //图片上传
     @ResponseBody
     @Permission("1004")
@@ -115,7 +130,7 @@ public class ServiceItemController extends BaseController {
      */
     private String uploadFile(HttpServletRequest request, String dstFileName) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image");
+        File fileUploadPath = new File(url);
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();
@@ -143,7 +158,7 @@ public class ServiceItemController extends BaseController {
      */
     private void uploadImage(HttpServletRequest request, String dstFileName, String serviceItemId) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image");
+        File fileUploadPath = new File(url);
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();
@@ -181,14 +196,24 @@ public class ServiceItemController extends BaseController {
     /*
      * 生成文件名
      */
-    public static String getRandomString(int length) { //length表示生成字符串的长度
+    private String getRandomString(int length) { //length表示生成字符串的长度
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             int number = random.nextInt(base.length());
             sb.append(base.charAt(number));
         }
         return sb.toString();
+    }
+
+    //删除文件
+    private void deleteFile(String fileName) {
+        File file = new File(fileName);
+        if (file.exists() && file.isFile()) {
+            file.delete();
+        } else {
+            System.out.println("删除单个文件失败：" + fileName + "不存在！");
+        }
     }
 }
