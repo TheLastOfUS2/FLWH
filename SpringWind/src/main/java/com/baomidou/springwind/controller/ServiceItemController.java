@@ -30,6 +30,15 @@ public class ServiceItemController extends BaseController {
 
     private ServiceItem serviceItem1 = new ServiceItem();
 
+    //未添加图片时默认图片路径
+    private String defaultUrl = "\\static\\img\\timg.jpg";
+
+    //删除图片路径
+    private String delUrl = "C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF";
+
+    //保存图片路径
+    private String saveUrl = "C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image";
+
     //跳转list
     @Permission("1004")
     @RequestMapping("/list")
@@ -84,16 +93,19 @@ public class ServiceItemController extends BaseController {
     @RequestMapping("/delServiceItem/{serviceItemId}")
     public String delServiceItem(@PathVariable String serviceItemId) {
         ServiceItem serviceItem = serviceItemService.selectByServiceItemId(serviceItemId);
-        if (serviceItem == null) {
-            serviceItem = serviceItemService.selectById(serviceItemId);
-        } else {
-            for (Image i : serviceItem.getImageList()) {
-                String imageUrl = i.getImageUrl();
-                deleteFile("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF" + imageUrl);
+        for (Image i : serviceItem.getImageList()) {
+            if (i.getImageUrl().equals(defaultUrl)) {
+                break;
             }
+            String imageUrl = i.getImageUrl();
+            deleteFile(delUrl + imageUrl);
         }
-        deleteFile("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF" + serviceItem.getTitleImage());
-        deleteFile("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF" + serviceItem.getDescribeImage());
+        if (!serviceItem.getTitleImage().equals(defaultUrl)) {
+            deleteFile(delUrl + serviceItem.getTitleImage());
+        }
+        if (!serviceItem.getDescribeImage().equals(defaultUrl)) {
+            deleteFile(delUrl + serviceItem.getDescribeImage());
+        }
         serviceItemService.deleteById(serviceItemId);
         imageService.deleteByItemId(serviceItemId);
         return Boolean.TRUE.toString();
@@ -109,9 +121,9 @@ public class ServiceItemController extends BaseController {
         String s = uploadFile(request, multipartHttpServletRequest.getParameter("name"));
         serviceItem.setServiceItemId(serviceItem1.getServiceItemId());
         if (multipartHttpServletRequest.getParameter("name").equals("titleImage")) {
-            serviceItem.setTitleImage("\\static\\image\\" + s);
+            serviceItem.setTitleImage(s);
         } else {
-            serviceItem.setDescribeImage("\\static\\image\\" + s);
+            serviceItem.setDescribeImage(s);
         }
         serviceItemService.updateById(serviceItem);
         return "1";
@@ -132,7 +144,7 @@ public class ServiceItemController extends BaseController {
      */
     private String uploadFile(HttpServletRequest request, String dstFileName) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image");
+        File fileUploadPath = new File(saveUrl);
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();
@@ -140,15 +152,18 @@ public class ServiceItemController extends BaseController {
         if (ServletFileUpload.isMultipartContent(request)) {
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             List<MultipartFile> fileList = multipartRequest.getFiles(dstFileName);
-            for (MultipartFile item : fileList) {
-                String fileName = "";        //当前上传文件全名称
-                try {
-                    fileName = item.getOriginalFilename();
-                    saveFileName = getNowDate() + "_" + getRandomString(16) + ".jpg";
-                    File savedFile = new File(fileUploadPath, saveFileName);
-                    item.transferTo(savedFile);
-                } catch (Exception e) {
-                    logger.error(e.getMessage());
+            if (fileList.size() == 0) {
+                saveFileName = defaultUrl;
+            } else {
+                for (MultipartFile item : fileList) {
+                    try {
+                        saveFileName = getNowDate() + "_" + getRandomString(16) + ".jpg";
+                        File savedFile = new File(fileUploadPath, saveFileName);
+                        item.transferTo(savedFile);
+                        saveFileName = "\\static\\image\\" + saveFileName;
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
+                    }
                 }
             }
         }
@@ -160,7 +175,7 @@ public class ServiceItemController extends BaseController {
      */
     private void uploadImage(HttpServletRequest request, String dstFileName, String serviceItemId) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File("C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image");
+        File fileUploadPath = new File(saveUrl);
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();
@@ -169,19 +184,25 @@ public class ServiceItemController extends BaseController {
             Image image = new Image();
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             List<MultipartFile> fileList = multipartRequest.getFiles(dstFileName);
-            for (MultipartFile item : fileList) {
-                String fileName = "";        //当前上传文件全名称
-                try {
-                    fileName = item.getOriginalFilename();
-                    saveFileName = getNowDate() + "_" + getRandomString(16) + ".jpg";
-                    File savedFile = new File(fileUploadPath, saveFileName);
-                    item.transferTo(savedFile);
-                    image.setImageId(UUID.randomUUID().toString());
-                    image.setImageUrl("\\static\\image\\" + saveFileName);
-                    image.setItemId(serviceItemId);
-                    imageService.insert(image);
-                } catch (Exception e) {
-                    logger.error(e.getMessage());
+            if (fileList.size() == 0) {
+                saveFileName = defaultUrl;
+                image.setImageId(UUID.randomUUID().toString());
+                image.setImageUrl(saveFileName);
+                image.setItemId(serviceItemId);
+                imageService.insert(image);
+            } else {
+                for (MultipartFile item : fileList) {
+                    try {
+                        saveFileName = getNowDate() + "_" + getRandomString(16) + ".jpg";
+                        File savedFile = new File(fileUploadPath, saveFileName);
+                        item.transferTo(savedFile);
+                        image.setImageId(UUID.randomUUID().toString());
+                        image.setImageUrl("\\static\\image\\" + saveFileName);
+                        image.setItemId(serviceItemId);
+                        imageService.insert(image);
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
+                    }
                 }
             }
         }
