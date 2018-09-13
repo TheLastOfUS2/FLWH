@@ -21,12 +21,6 @@
     delete from news_item
     where newsItemId = #{newsItemId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.baomidou.springwind.entity.NewsItem" >
-    insert into news_item (newsItemId, insertTime, titleText,
-      titleImage, describeText)
-    values (#{newsItemId,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{titleText,jdbcType=VARCHAR}, 
-      #{titleImage,jdbcType=VARCHAR}, #{describeText,jdbcType=VARCHAR})
-  </insert>
   <insert id="insertSelective" parameterType="com.baomidou.springwind.entity.NewsItem" >
     insert into news_item
     <trim prefix="(" suffix=")" suffixOverrides="," >

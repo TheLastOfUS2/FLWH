@@ -1,8 +1,13 @@
 package com.baomidou.springwind.entity;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.util.Date;
 
+@TableName("news_item")
 public class NewsItem {
+    @TableId
     private String newsItemId;
 
     private Date insertTime;
@@ -12,6 +17,16 @@ public class NewsItem {
     private String titleImage;
 
     private String describeText;
+
+    private String editText;
+
+    public String getEditText() {
+        return editText;
+    }
+
+    public void setEditText(String editText) {
+        this.editText = editText;
+    }
 
     public String getNewsItemId() {
         return newsItemId;
