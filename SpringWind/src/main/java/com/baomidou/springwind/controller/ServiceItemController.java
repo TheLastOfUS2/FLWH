@@ -7,6 +7,7 @@ import com.baomidou.springwind.entity.ServiceItem;
 import com.baomidou.springwind.service.ImageService;
 import com.baomidou.springwind.service.ServiceItemService;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,13 +32,7 @@ public class ServiceItemController extends BaseController {
     private ServiceItem serviceItem1 = new ServiceItem();
 
     //未添加图片时默认图片路径
-    private String defaultUrl = "\\static\\img\\timg.jpg";
-
-    //删除图片路径
-    private String delUrl = "C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF";
-
-    //保存图片路径
-    private String saveUrl = "C:\\Users\\18502\\Desktop\\zar\\java\\FLWH\\SpringWind\\src\\main\\webapp\\WEB-INF\\static\\image";
+    private String defaultUrl = "/static/img/timg.jpg";
 
     //跳转list
     @Permission("1004")
@@ -65,9 +60,18 @@ public class ServiceItemController extends BaseController {
     //修改查询信息
     @Permission("1004")
     @RequestMapping("/edit")
-    public String edit(Model model, String id) {
+    public String edit(HttpServletRequest request, Model model, String id) {
+        String image = "";
         if (id != null) {
-            model.addAttribute("serviceItem", serviceItemService.selectByServiceItemId(id));
+            ServiceItem serviceItem = serviceItemService.selectByServiceItemId(id);
+            model.addAttribute("serviceItem", serviceItem);
+            image = image + "/SpringWind" + serviceItem.getImageList().get(0).getImageUrl();
+            if (serviceItem.getImageList().size() > 1) {
+                for (int i = 1; i < serviceItem.getImageList().size(); i++) {
+                    image = image + "," + "/SpringWind" + serviceItem.getImageList().get(i).getImageUrl();
+                }
+            }
+            model.addAttribute("image", image);
         }
         return "/serviceItem/edit";
     }
@@ -91,20 +95,20 @@ public class ServiceItemController extends BaseController {
     @ResponseBody
     @Permission("1004")
     @RequestMapping("/delServiceItem/{serviceItemId}")
-    public String delServiceItem(@PathVariable String serviceItemId) {
+    public String delServiceItem(HttpServletRequest request, @PathVariable String serviceItemId) {
         ServiceItem serviceItem = serviceItemService.selectByServiceItemId(serviceItemId);
         for (Image i : serviceItem.getImageList()) {
             if (i.getImageUrl().equals(defaultUrl)) {
                 break;
             }
             String imageUrl = i.getImageUrl();
-            deleteFile(delUrl + imageUrl);
+            deleteFile(request.getSession().getServletContext().getRealPath("/WEB-INF") + imageUrl);
         }
         if (!serviceItem.getTitleImage().equals(defaultUrl)) {
-            deleteFile(delUrl + serviceItem.getTitleImage());
+            deleteFile(request.getSession().getServletContext().getRealPath("/WEB-INF") + serviceItem.getTitleImage());
         }
         if (!serviceItem.getDescribeImage().equals(defaultUrl)) {
-            deleteFile(delUrl + serviceItem.getDescribeImage());
+            deleteFile(request.getSession().getServletContext().getRealPath("/WEB-INF") + serviceItem.getDescribeImage());
         }
         serviceItemService.deleteById(serviceItemId);
         imageService.deleteByItemId(serviceItemId);
@@ -117,14 +121,90 @@ public class ServiceItemController extends BaseController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String uploadReport(HttpServletRequest request, HttpServletResponse response) {
         ServiceItem serviceItem = new ServiceItem();
-        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-        String s = uploadFile(request, multipartHttpServletRequest.getParameter("name"));
+        MultipartHttpServletRequest servletRequest = (MultipartHttpServletRequest) request;
+        String s = uploadFile(request, servletRequest.getParameter("name"));
         serviceItem.setServiceItemId(serviceItem1.getServiceItemId());
-        if (multipartHttpServletRequest.getParameter("name").equals("titleImage")) {
+        if (servletRequest.getParameter("name").equals("titleImage")) {
             serviceItem.setTitleImage(s);
         } else {
             serviceItem.setDescribeImage(s);
         }
+        serviceItemService.updateById(serviceItem);
+        return "1";
+    }
+
+    @ResponseBody
+    @Permission("1004")
+    @RequestMapping(value = "/editTitleImage", method = RequestMethod.POST)
+    public String editTitleImage(HttpServletRequest request, HttpServletResponse response) {
+        MultipartHttpServletRequest servletRequest = (MultipartHttpServletRequest) request;
+        File fileUploadPath = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/static/img"));
+        ServiceItem serviceItem = serviceItemService.selectByServiceItemId(servletRequest.getParameter("serviceItemId"));
+        String saveFileName = "";    //保存到服务器目录的文件名称
+        if (ServletFileUpload.isMultipartContent(request)) {
+            List<MultipartFile> fileList = servletRequest.getFiles(servletRequest.getParameter("name"));
+            if (fileList.size() == 0  &&  !serviceItem.getTitleImage().equals(defaultUrl)) {
+                return "1";
+            } else if (fileList.size() == 0) {
+                saveFileName = defaultUrl;
+                if (!serviceItem.getTitleImage().equals(defaultUrl)) {
+                    deleteFile(request.getSession().getServletContext().getRealPath("/WEB-INF") + serviceItem.getTitleImage());
+                }
+            } else {
+                for (MultipartFile item : fileList) {
+                    try {
+                        saveFileName = getNowDate() + "_" + getRandomString(16) + ".jpg";
+                        File savedFile = new File(fileUploadPath, saveFileName);
+                        item.transferTo(savedFile);
+                        saveFileName = "/static/img/" + saveFileName;
+                        if (!serviceItem.getTitleImage().equals(defaultUrl)) {
+                            deleteFile(request.getSession().getServletContext().getRealPath("/WEB-INF") + serviceItem.getTitleImage());
+                        }
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
+                    }
+                }
+            }
+        }
+        serviceItem.setTitleImage(saveFileName);
+        serviceItemService.updateById(serviceItem);
+        return "1";
+    }
+
+    @ResponseBody
+    @Permission("1004")
+    @RequestMapping(value = "/editDescribeImage", method = RequestMethod.POST)
+    public String editDescribeImage(HttpServletRequest request, HttpServletResponse response) {
+        String saveFileName = "";    //保存到服务器目录的文件名称
+        MultipartHttpServletRequest servletRequest = (MultipartHttpServletRequest) request;
+        File fileUploadPath = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/static/img"));
+        ServiceItem serviceItem = serviceItemService.selectByServiceItemId(servletRequest.getParameter("serviceItemId"));
+        if (ServletFileUpload.isMultipartContent(request)) {
+            List<MultipartFile> fileList = servletRequest.getFiles(servletRequest.getParameter("name"));
+             if (fileList.size() == 0  &&  !serviceItem.getDescribeImage().equals(defaultUrl)) {
+                return "1";
+            } else if (fileList.size() == 0) {
+                saveFileName = defaultUrl;
+                if (!serviceItem.getDescribeImage().equals(defaultUrl)) {
+                    deleteFile(request.getSession().getServletContext().getRealPath("/WEB-INF") + serviceItem.getDescribeImage());
+                }
+            } else {
+                for (MultipartFile item : fileList) {
+                    try {
+                        saveFileName = getNowDate() + "_" + getRandomString(16) + ".jpg";
+                        File savedFile = new File(fileUploadPath, saveFileName);
+                        item.transferTo(savedFile);
+                        saveFileName = "/static/img/" + saveFileName;
+                        if (!serviceItem.getDescribeImage().equals(defaultUrl)) {
+                            deleteFile(request.getSession().getServletContext().getRealPath("/WEB-INF") + serviceItem.getDescribeImage());
+                        }
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
+                    }
+                }
+            }
+        }
+        serviceItem.setDescribeImage(saveFileName);
         serviceItemService.updateById(serviceItem);
         return "1";
     }
@@ -144,7 +224,7 @@ public class ServiceItemController extends BaseController {
      */
     private String uploadFile(HttpServletRequest request, String dstFileName) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File(saveUrl);
+        File fileUploadPath = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/static/img"));
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();
@@ -160,7 +240,7 @@ public class ServiceItemController extends BaseController {
                         saveFileName = getNowDate() + "_" + getRandomString(16) + ".jpg";
                         File savedFile = new File(fileUploadPath, saveFileName);
                         item.transferTo(savedFile);
-                        saveFileName = "\\static\\image\\" + saveFileName;
+                        saveFileName = "/static/img/" + saveFileName;
                     } catch (Exception e) {
                         logger.error(e.getMessage());
                     }
@@ -175,7 +255,7 @@ public class ServiceItemController extends BaseController {
      */
     private void uploadImage(HttpServletRequest request, String dstFileName, String serviceItemId) {
         //判断保存文件的路径是否存在
-        File fileUploadPath = new File(saveUrl);
+        File fileUploadPath = new File(request.getSession().getServletContext().getRealPath("/WEB-INF/static/img"));
         String saveFileName = "";    //保存到服务器目录的文件名称
         if (!fileUploadPath.exists()) {
             fileUploadPath.mkdir();
@@ -197,7 +277,7 @@ public class ServiceItemController extends BaseController {
                         File savedFile = new File(fileUploadPath, saveFileName);
                         item.transferTo(savedFile);
                         image.setImageId(UUID.randomUUID().toString());
-                        image.setImageUrl("\\static\\image\\" + saveFileName);
+                        image.setImageUrl("/static/img/" + saveFileName);
                         image.setItemId(serviceItemId);
                         imageService.insert(image);
                     } catch (Exception e) {
