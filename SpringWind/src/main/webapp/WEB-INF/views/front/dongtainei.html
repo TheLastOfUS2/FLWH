@@ -9,6 +9,7 @@
 <title>大连峰岚文化有限公司</title>
 <script src="../../front/js/jquery.1.9.1.js"></script>
 <script src="../../front/js/index.js"></script>
+<script src="#springUrl('/static/js/common.js')"></script>
 <script src="../../front/js/dongtainei.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -20,11 +21,46 @@
                     var d = JSON.parse(data);
                     if (d.result!=null){
                         $(".lunbo img").attr("src",d.result.backgroundImg);
-                        // $(".art3").html(d.result.editText);
                     }
                 }
             });
-        })
+            $.ajax({
+                url: "#springUrl('/sys/newsItem/getNewsItemListForFront')",
+                type: "POST",
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    console.log(d);
+                    var newsItemList = d.rows;
+                    var newsItemOne = '';
+                    if (newsItemList != null && newsItemList.length !== 0) {
+                        console.log(newsItemList);
+                        for (var i=0;i < newsItemList.length;i++){
+                            var newsItemOfList=newsItemList[i];
+                            var formatDate1 = formatDate(newsItemOfList.insertTime);
+                            formatDate1=formatDate1.toString().substr(5,7);
+                            newsItemOne = newsItemOne + "<div class='tu-div'>" +
+                            "<p>" +
+                            "<span class='month'>"+(formatDate1)+"</span>" +
+                            "<span class='span1'>峰岚动态</span>" +
+                            "<span class='span2'>"+(newsItemOfList.titleText)+"</span>" +
+                            "</p>" +
+                            "<a href='' class='img'><img src='"+(newsItemOfList.titleImage)+"' alt='' /></a>" +
+                            "<p class='text'>"+(newsItemOfList.describeText)+"</p>" +
+                            "<a href='javascript:void(0);' onclick='goNewsItem(" + '"' + newsItemOfList.newsItemId + '"' + ")' class='more'>MORE</a>" +
+                            "<p style='clear:both'></p>" +
+                            "</div>";
+                        }
+                        $(".tu").append(newsItemOne);
+                    }
+                }
+            });
+        });
+
+        function goNewsItem(newsItemId) {
+            console.log(newsItemId);
+            sessionStorage.setItem("newsItemId",newsItemId);
+            window.location.href="#springUrl('/front/news/toNewsItem')";
+        }
     </script>
 <link rel="stylesheet" href="../../front/css/dongtainei.css" />
 <link rel="stylesheet" href="../../front/css/head-foot.css" />
@@ -58,50 +94,6 @@
         <img src="../../front/images/dongtai-xiang1.png" alt="" class="new" />
         <!-- 图片部分 -->
         <div class="tu">
-            <div class="tu-div">
-              <p>
-                <span class="month">12<br>03月</span>
-                <span class="span1">峰岚动态</span>
-                <span class="span2">中国化学会第八届全国配位化学会议</span>
-              </p>
-              <a href="" class="img"><img src="../../front/images/dongtai-nei1.png" alt="" /></a>
-              <p class="text">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍</p>
-              <a href="dongtaixiang.html" class="more">MORE</a>
-              <p style="clear:both"></p>
-            </div>
-            <div class="tu-div">
-              <p>
-                <span class="month">12<br>03月</span>
-                <span class="span1">峰岚动态</span>
-                <span class="span2">中国化学会第八届全国配位化学会议</span>
-              </p>
-              <a href="" class="img"><img src="../../front/images/dongtai-nei2.png" alt="" /></a>
-              <p class="text">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍</p>
-              <a href="dongtaixiang.html" class="more">MORE</a>
-              <p style="clear:both"></p>
-            </div>
-            <div class="tu-div">
-              <p>
-                <span class="month">12<br>03月</span>
-                <span class="span1">峰岚动态</span>
-                <span class="span2">中国化学会第八届全国配位化学会议</span>
-              </p>
-              <a href="" class="img"><img src="../../front/images/dongtai-nei3.png" alt="" /></a>
-              <p class="text">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍</p>
-              <a href="dongtaixiang.html" class="more">MORE</a>
-              <p style="clear:both"></p>
-            </div>
-            <div class="tu-div">
-              <p>
-                <span class="month">12<br>03月</span>
-                <span class="span1">峰岚动态</span>
-                <span class="span2">中国化学会第八届全国配位化学会议</span>
-              </p>
-              <a href="" class="img"><img src="../../front/images/dongtai-nei4.png" alt="" /></a>
-              <p class="text">活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍活动详情介绍</p>
-              <a href="dongtaixiang.html" class="more">MORE</a>
-              <p style="clear:both"></p>
-            </div>
         </div>
         <!-- 图片部分结束 -->
  

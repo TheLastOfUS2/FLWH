@@ -1,6 +1,10 @@
 package com.baomidou.springwind.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.kisso.annotation.Action;
+import com.baomidou.kisso.annotation.Login;
 import com.baomidou.kisso.annotation.Permission;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.NewsItem;
 import com.baomidou.springwind.entity.SecondMenu;
@@ -38,7 +42,33 @@ public class NewsItemController extends BaseController {
     @RequestMapping("/getNewsItemList")
     public String getNewsItemList() {
         Page<NewsItem> page = getPage();
-        return jsonPage(newsItemService.selectPage(page, null));
+        EntityWrapper ew=new EntityWrapper();
+        ew.setEntity(new NewsItem());
+        ew.orderBy("insertTime",false);
+        return jsonPage(newsItemService.selectPage(page, ew));
+    }
+
+    @ResponseBody
+    @Login(action = Action.Skip)
+    @Permission(action = Action.Skip)
+    @RequestMapping("/getNewsItemListForFront")
+    public String getNewsItemListForFront() {
+        Page<NewsItem> page = getPage();
+        EntityWrapper ew=new EntityWrapper();
+        ew.setEntity(new NewsItem());
+        ew.orderBy("insertTime",false);
+        return jsonPage(newsItemService.selectPage(page, ew));
+    }
+
+    @ResponseBody
+    @Login(action = Action.Skip)
+    @Permission(action = Action.Skip)
+    @RequestMapping("/getNewsItemForFront")
+    public JSONObject getNewsItemForFront(String newsItemId) {
+        NewsItem newsItem = newsItemService.selectById(newsItemId);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("data",newsItem);
+        return jsonObject;
     }
 
     @Permission("1005")

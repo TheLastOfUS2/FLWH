@@ -9,6 +9,26 @@
 <title>峰岚文化</title>
 <script src="../../front/js/jquery.1.9.1.js"></script>
 <script src="../../front/js/index.js"></script>
+    <script src="#springUrl('/static/js/common.js')"></script>
+    <script type="text/javascript">
+        var newsItemId = sessionStorage.getItem("newsItemId");
+        $(function () {
+            $.ajax({
+                url: "#springUrl('/sys/newsItem/getNewsItemForFront')",
+                type: "POST",
+                data:{newsItemId:newsItemId},
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    console.log(d);
+                    console.log(d.data.titleText);
+                    $("#newsItemTitle").html(d.data.titleText);
+                    $("#newsItemInsertTime").html(formatDate(d.data.insertTime).toString())
+                    $("#newsItemDescribe").html(d.data.describeText);
+                    $(".art2").html(d.data.editText);
+                }
+            });
+        });
+    </script>
 <link rel="stylesheet" href="../../front/css/dongtaixiang.css" />
 <link rel="stylesheet" href="../../front/css/head-foot.css" />
 
@@ -42,57 +62,14 @@
 <div class="art">
     <img src="../../front/images/dongtai-xiang1.png" alt="" class="new" />
     <div class="art0">
-      <p class="art0-title">大连理工大学大连青友会3周年庆典</p>
-      <p class="date">2018/3/22</p>
-      <p>一路走来，已有三载</p>
-      <p>有喜悦，有感动</p>
-      <p>有伤心，有幸福</p>
-      <p>三周年庆典之夜</p>
-      <p>我们把它记录下来</p>
-      <p>不是为了纪念感动自己</p>
-      <p>而是为了更好地出发，做更好的自己！</p>
-      <p class="line"><span></span>偶是华丽丽的分割线<span></span></p>
+      <p class="art0-title" id="newsItemTitle"></p>
+      <p class="date" id="newsItemInsertTime"></p>
+      <p id="newsItemDescribe"></p>
     </div>
     <!-- 图片部分 -->
     <div class="art2">
-        <p class="art2-til">大连理工大学大连青友会3周年全程记录之<span>PART1</span><img src="../../front/images/dongtai-xiang2.png" alt="" /></p>
-        <div class="art2-div">
-            <a href=""><img src="../../front/images/dongtai-xiang5.png" alt=""class="art2-img" /></a>
-        </div>
-        <div class="art2-div">
-            <a href=""><img src="../../front/images/dongtai-xiang6.png" alt=""class="art2-img" /></a>
-        </div>
-        <p class="art2-til">大连理工大学大连青友会3周年全程记录之<span>PART2</span><img src="../../front/images/dongtai-xiang3.png" alt="" /></p>
-        <div class="art2-div">
-            <a href=""><img src="../../front/images/dongtai-xiang7.png" alt=""class="art2-img" /></a>
-        </div>
-        <div class="art2-div">
-            <a href=""><img src="../../front/images/dongtai-xiang8.png" alt=""class="art2-img" /></a>
-        </div>
-        <p class="art2-til">大连理工大学大连青友会3周年全程记录之<span>PART1</span><img src="../../front/images/dongtai-xiang4.png" alt="" /></p>
-        <div class="art2-div">
-            <a href=""><img src="../../front/images/dongtai-xiang9.png" alt=""class="art2-img" /></a>
-        </div>
-        <div class="art2-div">
-            <a href=""><img src="../../front/images/dongtai-xiang10.png" alt=""class="art2-img" /></a>
-        </div>
-        <p style="clear:both"></p>
     </div>
-  
-    <!-- 页数 -->
-    <div id="pageGro">
-      <div class="pageUp"><img src="../../front/images/11.png" alt="" /></div>
-        <div class="pageList">
-            <ul>
-                <li class="pagebg">1</li>
-                <li>2</li>
-                <li> · · · </li>
-                <li>5</li>
-            </ul>
-        </div>
-      <div class="pageDown"><img src="../../front/images/22.png" alt="" /></div>
-      <div class="pagesum">共<span class="pages">5</span>页</div>
-    </div>
+
 
 </div>    
 <!-- art的div结束 -->

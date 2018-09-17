@@ -10,4 +10,9 @@ public class NewsController {
     public String toNews(){
         return "/front/dongtainei";
     }
+
+    @RequestMapping("/toNewsItem")
+    public String toNewsItem(){
+        return "/front/dongtaixiang";
+    }
 }
