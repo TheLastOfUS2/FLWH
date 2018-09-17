@@ -99,6 +99,8 @@
 </div>
 
 <script type="text/javascript">
+    var img = [];
+    img = "$!{image}".split(",");
 
     var TitleInput = function () {
         var oFile = new Object();
@@ -115,24 +117,26 @@
                 dropZoneEnabled: false,                               //是否显示拖拽区域
                 maxFileSize: 2000,                                       //单位为kb，如果为0表示不限制文件大小
                 maxFileCount: 1,                                       //表示允许同时上传的最大文件个数
+                autoReplace: true,                                     //重新选择图片覆盖原图片
                 enctype: 'multipart/form-data',
                 validateInitialCount: true,
                 previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
                 msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
                 layoutTemplates: {
-                    // actionDrag: '',
+                    actionDrag: '',
+                    actionDelete: '',
                     actionUpload: '',
                     actionZoom: ''
                 },
-                overwriteInitial: false,
+                overwriteInitial: true,
                 initialPreview: [
                     "#springUrl("$!{serviceItem.titleImage}")"
                 ],
                 initialPreviewAsData: true,
                 initialPreviewFileType: 'image',
-                // initialPreviewConfig: [
-                //     {caption: "sadf.jpg", size: 576237, width: "120px", key: 1}
-                // ],
+                initialPreviewConfig: [
+                    {caption: "sadf.jpg", size: 576237, width: "120px", key: 1}
+                ],
                 uploadExtraData: function (previewId, index) {  //传参
                     var data = {
                         "name": ctrlName,
@@ -165,19 +169,21 @@
                 dropZoneEnabled: false,                               //是否显示拖拽区域
                 maxFileSize: 2000,                                       //单位为kb，如果为0表示不限制文件大小
                 maxFileCount: 1,                                       //表示允许同时上传的最大文件个数
+                autoReplace: true,                                     //重新选择图片覆盖原图片
                 enctype: 'multipart/form-data',
                 validateInitialCount: true,
                 previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
                 msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
                 layoutTemplates: {
-                    // actionDrag: '',
+                    actionDrag: '',
+                    actionDelete: '',
                     actionUpload: '',
                     actionZoom: ''
                 },
-                overwriteInitial: false,
+                overwriteInitial: true,
                 initialPreview: [
                     "#springUrl("$!{serviceItem.describeImage}")"
-                ],
+        ],
                 initialPreviewAsData: true,
                 initialPreviewFileType: 'image',
                 // initialPreviewConfig: [
@@ -225,8 +231,9 @@
                     actionZoom: ''
                 },
                 overwriteInitial: false,
-                initialPreview: [
-                    
+                initialPreview: img,
+                initialPreviewConfig: [
+                    {caption: "sadf.jpg", size: 576237, width: "120px", key: 1}
                 ],
                 initialPreviewAsData: true,
                 initialPreviewFileType: 'image',
@@ -251,9 +258,9 @@
     var describeImage = new DescribeInput();
     var image = new ImageInput();
 
-    titleImage.Init("titleImage", "/SpringWind/sys/serviceItem/upload");
-    describeImage.Init("describeImage", "/SpringWind/sys/serviceItem/upload");
-    image.Init("image", "/SpringWind/sys/serviceItem/uploadImage");
+    titleImage.Init("titleImage", "/SpringWind/sys/serviceItem/editTitleImage");
+    describeImage.Init("describeImage", "/SpringWind/sys/serviceItem/editDescribeImage");
+    image.Init("image", "/SpringWind/sys/serviceItem/editImage");
 
     $("#myForm").validator({
         valid: function (form) {
@@ -268,8 +275,10 @@
                     console.log(data);
                     if (data) {
                         $('#titleImage').fileinput('upload');
+                        console.log("");
                         $('#describeImage').fileinput('upload');
-                        $('#image').fileinput('upload');
+                        // $('#image').fileinput('upload');
+                        window.parent.location.reload();
                     }
                 }
             });
