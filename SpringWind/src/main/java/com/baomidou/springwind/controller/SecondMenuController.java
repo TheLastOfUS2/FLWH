@@ -1,5 +1,9 @@
 package com.baomidou.springwind.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.kisso.annotation.Action;
+import com.baomidou.kisso.annotation.Login;
 import com.baomidou.kisso.annotation.Permission;
 import com.baomidou.kisso.common.encrypt.SaltEncoder;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -74,5 +78,20 @@ public class SecondMenuController extends BaseController {
             }
         }
         return callbackSuccess(rlt);
+    }
+
+
+    @Login(action = Action.Skip)
+    @Permission(action = Action.Skip)
+    @ResponseBody
+    @RequestMapping("/selectForShow")
+    public JSONObject selectForShow(String id) {
+        JSONObject json = new JSONObject();
+        if ( id != null ) {
+            SecondMenuExt secondMenuExt = secondMenuService.selectByIdMy(id);
+            json.put("result",secondMenuExt);
+            return json;
+        }
+        return null;
     }
 }

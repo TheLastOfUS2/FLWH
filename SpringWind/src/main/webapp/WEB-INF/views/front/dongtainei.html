@@ -10,6 +10,22 @@
 <script src="../../front/js/jquery.1.9.1.js"></script>
 <script src="../../front/js/index.js"></script>
 <script src="../../front/js/dongtainei.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "#springUrl('/sys/secondMenu/selectForShow')",
+                data: {id:"4"},
+                type: "POST",
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    if (d.result!=null){
+                        $(".lunbo img").attr("src",d.result.backgroundImg);
+                        // $(".art3").html(d.result.editText);
+                    }
+                }
+            });
+        })
+    </script>
 <link rel="stylesheet" href="../../front/css/dongtainei.css" />
 <link rel="stylesheet" href="../../front/css/head-foot.css" />
 </head>

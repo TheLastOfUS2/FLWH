@@ -8,7 +8,6 @@
 <meta name="format-detection" content="telephone=no">
 <title>峰岚文化</title>
 <link rel="stylesheet" href="../../front/css/guanyufenglan.css" />
-
 </head>
 <body onload="lianXi()" onresize="lianXi()">
 <div class="conter">
@@ -42,5 +41,21 @@
 
 <script src="../../front/js/jquery.1.9.1.js"></script>
 <script src="../../front/js/index.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: "#springUrl('/sys/secondMenu/selectForShow')",
+            data: {id:"2"},
+            type: "POST",
+            success: function (data) {
+                var d = JSON.parse(data);
+                if (d.result!=null){
+                    $(".conter").css({"background-image":"url("+(d.result.backgroundImg)+")"})
+                    $(".art3").html(d.result.editText);
+                }
+            }
+        });
+    })
+</script>
 </body>
 </html>

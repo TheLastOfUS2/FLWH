@@ -17,6 +17,7 @@
     <result column="partName" property="partName" jdbcType="VARCHAR" />
     <result column="backgroundImg" property="backgroundImg" jdbcType="VARCHAR" />
     <result column="editText" property="editText" jdbcType="VARCHAR" />
+    <result column="imageId" property="imageId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     secondMenuId, titleOne, titleTwo, titleThree, describeOne, describeTwo, describeThree, 
@@ -32,7 +33,7 @@
       select secondMenuId,(select partValue from part where second_menu.partId = part.partId)as partName from second_menu;
     </select>
     <select id="selectById" resultMap="BaseResultMapExt" parameterType="java.lang.String">
-      select secondMenuId,(select partValue from part where second_menu.partId = part.partId)as partName,backgroundImg,editText from second_menu where secondMenuId = #{secondMenuId,jdbcType=VARCHAR};
+      select secondMenuId,(select partValue from part where second_menu.partId = part.partId)as partName,backgroundImg,editText,imageId from second_menu where secondMenuId = #{secondMenuId,jdbcType=VARCHAR};
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from second_menu

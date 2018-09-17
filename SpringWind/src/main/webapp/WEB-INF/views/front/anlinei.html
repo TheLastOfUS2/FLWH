@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=no">
-<title>大连峰岚文化有限公司</title>
-<script src="../../front/js/jquery.1.9.1.js"></script>
-<script src="../../front/js/anlinei.js"></script>
-<script src="../../front/js/index.js"></script>
-<link rel="stylesheet" href="../../front/css/anlinei.css" />
-<link rel="stylesheet" href="../../front/css/head-foot.css" />
-<link rel="stylesheet" href="../../front/css/style.css" />
-<link rel="stylesheet" href="../../front/css/bootstrap.css" />
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>大连峰岚文化有限公司</title>
+    <script src="../../front/js/jquery.1.9.1.js"></script>
+    <script src="../../front/js/anlinei.js"></script>
+    <script src="../../front/js/index.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "#springUrl('/sys/secondMenu/selectForShow')",
+                data: {id: "3"},
+                type: "POST",
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    if (d.result != null) {
+                        $(".art0").html(d.result.editText);
+                        var imageLunBo = "";
+                        var imageList = d.result.imageId.split(",");
+                        console.log(imageList);
+                        if (imageList != null && imageList.length !== 0) {
+                            for (var i=0;i < imageList.length;i++){
+                                imageLunBo = imageLunBo + "<a href='#'><img src='"+(imageList[i])+"'/></a>";
+                            }
+                            console.log(imageLunBo);
+                            $(".lunbo").append(imageLunBo);
+                        }
+                    }
+                }
+            });
+        })
+    </script>
+    <link rel="stylesheet" href="../../front/css/anlinei.css"/>
+    <link rel="stylesheet" href="../../front/css/head-foot.css"/>
+    <link rel="stylesheet" href="../../front/css/style.css"/>
+    <link rel="stylesheet" href="../../front/css/bootstrap.css"/>
 </head>
 <body>
 <!-- 头部导航 -->
 <div class="header">
-      <img src="../../front/images/logo.png" alt="" class="logo" />
-      <a class="btn"><img src="../../front/images/nav1.png" alt="" /></a>
-      <div class="nav">
+    <img src="../../front/images/logo.png" alt="" class="logo"/>
+    <a class="btn"><img src="../../front/images/nav1.png" alt=""/></a>
+    <div class="nav">
         <ul>
             <li><a href="../home/toIndex">首页</a></li>
             <li><a href="../advantage/toAdvantage">峰岚优势</a></li>
@@ -29,30 +55,30 @@
             <li><a href="../news/toNews">峰岚动态</a></li>
             <li><a href="../contact/toContact">联系我们</a></li>
         </ul>
-        <a class="del"><img src="../../front/images/del.png" alt="" /></a>
-      </div>
+        <a class="del"><img src="../../front/images/del.png" alt=""/></a>
+    </div>
 </div>
 <!-- 头部导航结束 -->
 <div class="middle_right">
     <div id="lunbobox">
         <div class="lunbo">
-          <a href="#"><img src="../../front/images/anli-nei1.png" /></a>
-          <a href="#"><img src="../../front/images/anli-nei0.png" /></a>
-          <a href="#"><img src="../../front/images/anli-nei1.png" /></a>
-          <a href="#"><img src="../../front/images/anli-nei0.png" /></a>
-          <a href="#"><img src="../../front/images/anli-nei1.png" /></a>
+            <!--<a href="#"><img src="../../front/images/anli-nei1.png"/></a>-->
+            <!--<a href="#"><img src="../../front/images/anli-nei0.png"/></a>-->
+            <!--<a href="#"><img src="../../front/images/anli-nei1.png"/></a>-->
+            <!--<a href="#"><img src="../../front/images/anli-nei0.png"/></a>-->
+            <!--<a href="#"><img src="../../front/images/anli-nei1.png"/></a>-->
         </div>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
         </ul>
         <span></span>
     </div>
 
-<div class="art">
+    <div class="art">
         <div class="art0">
             <p class="art0-title">选择峰岚文化，就是选择安心和卓有成效！</p>
             <p>
@@ -60,13 +86,13 @@
                 <span class="art0-span">只为目标想办法，不为省事找理由<br>竭尽所能实现客户要求，只是不想对客户说 “对不起，做不到” </span>
             </p>
             <p>
-                 <a class="art0-a">专&nbsp;&nbsp;&nbsp;&nbsp;业</a>
+                <a class="art0-a">专&nbsp;&nbsp;&nbsp;&nbsp;业</a>
                 <span class="art0-span">专业的文案、策划、视觉设计、影视拍摄、后期制作团队<br>实战经验丰富，匠心打造每个项目</span>
             </p>
             <p>
                 <a class="art0-a">全&nbsp;&nbsp;&nbsp;&nbsp;面</a>
                 <span class="art0-span">不必再东奔西走<br>峰岚五大业务一站式达成企业文化和品牌建设目标</span>
-            </p> 
+            </p>
         </div>
         <!-- 手机版 -->
         <div class="sj-art0">
@@ -76,159 +102,159 @@
                 <span class="sj-art0-span">只为目标想办法，不为省事找理由<br>竭尽所能实现客户要求，只是不想对客户说 “对不起，做不到” </span>
             </p>
             <p>
-                 <a class="sj-art0-a">专&nbsp;&nbsp;&nbsp;&nbsp;业</a>
+                <a class="sj-art0-a">专&nbsp;&nbsp;&nbsp;&nbsp;业</a>
                 <span class="sj-art0-span">专业的文案、策划、视觉设计、影视拍摄、后期制作团队<br>实战经验丰富，匠心打造每个项目</span>
             </p>
             <p>
                 <a class="sj-art0-a">全&nbsp;&nbsp;&nbsp;&nbsp;面</a>
                 <span class="sj-art0-span">不必再东奔西走<br>峰岚五大业务一站式达成企业文化和品牌建设目标</span>
-            </p> 
+            </p>
         </div>
-      <!-- 导航部分 -->
-      <p class="art1">
-          <a href="anlinei.html" class="art11">作品案例 ｜</a>
-          <a href="anlinei.html" class="xs">活动策划执行</a>
-          <a href="anlinei1.html">会议承办</a>
-          <a href="anlinei2.html">影视拍摄</a>
-          <a href="anlinei3.html">视觉传达</a>
-          <a href="anlinei4.html">新媒体互动营销</a>
-      </p>
-      <!-- 手机版 -->
-      <div class="sj-art1">
-          <a href="anlinei.html" class="sj-art11">作品案例 ｜</a>
-          <div class="sj-art12">
+        <!-- 导航部分 -->
+        <p class="art1">
+            <a href="anlinei.html" class="art11">作品案例 ｜</a>
             <a href="anlinei.html" class="xs">活动策划执行</a>
             <a href="anlinei1.html">会议承办</a>
             <a href="anlinei2.html">影视拍摄</a>
             <a href="anlinei3.html">视觉传达</a>
             <a href="anlinei4.html">新媒体互动营销</a>
-          </div>
-      </div>
-      <!-- 图片部分 -->
-    <div class="art2">
-        <div class="art2-div">
-            <a href=""class="art2-a"><img src="../../front/images/1huodong/1/index.jpg" alt="" /></a>
-            <a href="anlixiang.html">
-              <p class="art2-p">
-                 <span>活动策划执行</span>
-                 <span>2015马克西姆古典音乐会</span> 
-              </p>
-            </a>
+        </p>
+        <!-- 手机版 -->
+        <div class="sj-art1">
+            <a href="anlinei.html" class="sj-art11">作品案例 ｜</a>
+            <div class="sj-art12">
+                <a href="anlinei.html" class="xs">活动策划执行</a>
+                <a href="anlinei1.html">会议承办</a>
+                <a href="anlinei2.html">影视拍摄</a>
+                <a href="anlinei3.html">视觉传达</a>
+                <a href="anlinei4.html">新媒体互动营销</a>
+            </div>
         </div>
-        <div class="art2-div">
-            <a href=""class="art2-a"><img src="../../front/images/1huodong/2/index.jpg" alt="" /></a>
-            <a href="anlixiang1.html">
-              <p class="art2-p">
-                 <span>活动策划执行</span>
-                 <span>2015年儿童剧现场</span> 
-              </p>
-            </a>
+        <!-- 图片部分 -->
+        <div class="art2">
+            <div class="art2-div">
+                <a href="" class="art2-a"><img src="../../front/images/1huodong/1/index.jpg" alt=""/></a>
+                <a href="anlixiang.html">
+                    <p class="art2-p">
+                        <span>活动策划执行</span>
+                        <span>2015马克西姆古典音乐会</span>
+                    </p>
+                </a>
+            </div>
+            <div class="art2-div">
+                <a href="" class="art2-a"><img src="../../front/images/1huodong/2/index.jpg" alt=""/></a>
+                <a href="anlixiang1.html">
+                    <p class="art2-p">
+                        <span>活动策划执行</span>
+                        <span>2015年儿童剧现场</span>
+                    </p>
+                </a>
+            </div>
+            <div class="art2-div">
+                <a href="" class="art2-a"><img src="../../front/images/1huodong/3/index.jpg" alt=""/></a>
+                <a href="anlixiang2.html">
+                    <p class="art2-p">
+                        <span>活动策划执行</span>
+                        <span>2016年儿童剧现场</span>
+                    </p>
+                </a>
+            </div>
+            <div class="art2-div">
+                <a href="" class="art2-a"><img src="../../front/images/1huodong/4/index.jpg" alt=""/></a>
+                <a href="anlixiang3.html">
+                    <p class="art2-p">
+                        <span>活动策划执行</span>
+                        <span>2016 大工青友会2周年庆典</span>
+                    </p>
+                </a>
+            </div>
+            <div class="art2-div">
+                <a href="" class="art2-a"><img src="../../front/images/1huodong/5/index.jpg" alt=""/></a>
+                <a href="anlixiang4.html">
+                    <p class="art2-p">
+                        <span>活动策划执行</span>
+                        <span>2017 大工青友会3周年庆典</span>
+                    </p>
+                </a>
+            </div>
+            <div class="art2-div">
+                <a href="" class="art2-a"><img src="../../front/images/1huodong/6/index.jpg" alt=""/></a>
+                <a href="anlixiang5.html">
+                    <p class="art2-p">
+                        <span>活动策划执行</span>
+                        <span>2017年金晟科技年会</span>
+                    </p>
+                </a>
+            </div>
+            <p style="clear:both"></p>
         </div>
-        <div class="art2-div">
-            <a href=""class="art2-a"><img src="../../front/images/1huodong/3/index.jpg" alt="" /></a>
-            <a href="anlixiang2.html">
-              <p class="art2-p">
-                 <span>活动策划执行</span>
-                 <span>2016年儿童剧现场</span> 
-              </p>
-            </a>
-        </div>
-        <div class="art2-div">
-            <a href=""class="art2-a"><img src="../../front/images/1huodong/4/index.jpg" alt="" /></a>
-            <a href="anlixiang3.html">
-              <p class="art2-p">
-                 <span>活动策划执行</span>
-                 <span>2016 大工青友会2周年庆典</span> 
-              </p>
-            </a>
-        </div>
-        <div class="art2-div">
-            <a href=""class="art2-a"><img src="../../front/images/1huodong/5/index.jpg" alt="" /></a>
-            <a href="anlixiang4.html">
-              <p class="art2-p">
-                 <span>活动策划执行</span>
-                 <span>2017 大工青友会3周年庆典</span> 
-              </p>
-            </a>
-        </div>
-        <div class="art2-div">
-            <a href=""class="art2-a"><img src="../../front/images/1huodong/6/index.jpg" alt="" /></a>
-            <a href="anlixiang5.html">
-              <p class="art2-p">
-                 <span>活动策划执行</span>
-                 <span>2017年金晟科技年会</span> 
-              </p>
-            </a>
-        </div>
-        <p style="clear:both"></p>
+
+
     </div>
+    <!-- art的div结束 -->
 
 
-</div>
-<!-- art的div结束 -->
+    <!-- 品牌滚动部分 -->
+    <div class="container">
+        <div id="single-quad" class="carousel slide" data-ride="carousel" data-shift="1">
+            <div class="carousel-inner">
+                <ul class="row item active">
+                    <li class="col-xs-2 one">
+                        <img src="../../front/images/anli-nei17.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 two">
+                        <img src="../../front/images/anli-nei18.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 three">
+                        <img src="../../front/images/anli-nei19.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 four">
+                        <img src="../../front/images/anli-nei20.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 five">
+                        <img src="../../front/images/anli-nei21.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 six">
+                        <img src="../../front/images/anli-nei22.png" class="img-responsive"/>
+                    </li>
+                </ul>
+                <ul class="row item">
+                    <li class="col-xs-2 seven">
+                        <img src="../../front/images/anli-nei17.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 eight">
+                        <img src="../../front/images/anli-nei18.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 eight">
+                        <img src="../../front/images/anli-nei19.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 eight">
+                        <img src="../../front/images/anli-nei20.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 eight">
+                        <img src="../../front/images/anli-nei21.png" class="img-responsive"/>
+                    </li>
+                    <li class="col-xs-2 eight">
+                        <img src="../../front/images/anli-nei22.png" class="img-responsive"/>
+                    </li>
+                </ul>
+            </div>
 
-
-<!-- 品牌滚动部分 -->
-<div class="container">
-     <div id="single-quad" class="carousel slide" data-ride="carousel" data-shift="1">
-        <div class="carousel-inner">
-          <ul class="row item active">
-            <li class="col-xs-2 one">
-              <img src="../../front/images/anli-nei17.png"class="img-responsive" />
-            </li>
-            <li class="col-xs-2 two">
-              <img src="../../front/images/anli-nei18.png"class="img-responsive" />
-            </li>
-            <li class="col-xs-2 three">
-              <img src="../../front/images/anli-nei19.png"class="img-responsive" />
-            </li>
-            <li class="col-xs-2 four">
-              <img src="../../front/images/anli-nei20.png" class="img-responsive" />
-            </li>
-            <li class="col-xs-2 five">
-              <img src="../../front/images/anli-nei21.png" class="img-responsive" />
-            </li>
-            <li class="col-xs-2 six">
-              <img src="../../front/images/anli-nei22.png" class="img-responsive" />
-            </li>
-          </ul>
-          <ul class="row item">
-            <li class="col-xs-2 seven">
-              <img src="../../front/images/anli-nei17.png" class="img-responsive" />
-            </li>
-            <li class="col-xs-2 eight">
-              <img src="../../front/images/anli-nei18.png"class="img-responsive" />
-            </li>
-            <li class="col-xs-2 eight">
-              <img src="../../front/images/anli-nei19.png"class="img-responsive" />
-            </li>
-            <li class="col-xs-2 eight">
-              <img src="../../front/images/anli-nei20.png"class="img-responsive" />
-            </li>
-            <li class="col-xs-2 eight">
-              <img src="../../front/images/anli-nei21.png" class="img-responsive" />
-            </li>
-            <li class="col-xs-2 eight">
-              <img src="../../front/images/anli-nei22.png" class="img-responsive" />
-            </li>
-          </ul>
+            <a class="carousel-control left" href="#single-quad" data-slide="prev"></a>
+            <a class="carousel-control right" href="#single-quad" data-slide="next"></a>
         </div>
-
-       <a class="carousel-control left" href="#single-quad" data-slide="prev"></a>
-        <a class="carousel-control right" href="#single-quad" data-slide="next"></a>
-      </div>      
-</div>
-  <!-- footer部分 -->
-  <p class="footer">
-    <span>大连峰岚文化有限公司</span>
-    <span>辽ICP备12345678号</span>
-  </p>
+    </div>
+    <!-- footer部分 -->
+    <p class="footer">
+        <span>大连峰岚文化有限公司</span>
+        <span>辽ICP备12345678号</span>
+    </p>
 
 </div>
 <!-- middle_right的div结束 -->
-   
+
 <!-- 一键向上 -->
-<a href="" class="top"><img src="../../front/images/top.png" alt="" /></a>
+<a href="" class="top"><img src="../../front/images/top.png" alt=""/></a>
 
 <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="../../front/js/lunbo.js"></script>

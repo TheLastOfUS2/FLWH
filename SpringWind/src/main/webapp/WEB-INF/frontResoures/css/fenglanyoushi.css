@@ -18,7 +18,7 @@ a{
 .conter{
 	width: 100%;
 	height: 100%;
-	background-image: url(../images/youshi-bg.jpg);
+	/*background-image: url(../images/youshi-bg.jpg);*/
 	background-position:center center;
 	position: relative;
 }

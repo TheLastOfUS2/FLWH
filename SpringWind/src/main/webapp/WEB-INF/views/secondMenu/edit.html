@@ -37,6 +37,18 @@
            </div>
            <input type="hidden" name="backgroundImg" id="backgroundImg"  value="$!{secondMenu.backgroundImg}">
        </div>
+       #if($!{secondMenu.secondMenuId}==3)
+       <div class="form-group">
+           <label  class="col-md-3 control-label">轮播图</label>
+           <div class="col-md-9">
+               <input id="myFiles" type="file" name="myFile" multiple class="fileloading">
+           </div>
+           <input type="hidden" name="imageId" id="imageId"  value="$!{secondMenu.imageId}">
+       </div>
+       #else
+       <div class="form-group"></div>
+       #end
+       #if($!{secondMenu.secondMenuId}!=4)
        <div class="form-group">
            <label  class="col-md-3 control-label">二级菜单介绍</label>
            <div class="col-md-9">
@@ -45,6 +57,9 @@
            <input name="editText" type="hidden" id="editText">
            <!--<input id="editTextOld" type="hidden" name="editTextOld" value="$!{secondMenu.editText}"/>-->
        </div>
+       #else
+       <div class="form-group"></div>
+       #end
        <div class="hr-line-dashed"></div>
        <div class="form-group">
            <div class="text-center">
@@ -73,7 +88,12 @@
 
     });
 
+    var arr = [];
+    var arr1=[];
     var path = [];
+    if ($("#imageId").val()!=null){
+        arr1=$("#imageId").val().split(",");
+    }
     path.push($("#backgroundImg").val());
     console.log(path);
 
@@ -95,6 +115,29 @@
         var res = data.response;
         $("#backgroundImg").attr("value", res.success);
     });
+
+    $("#myFiles").fileinput({
+        language : 'zh',
+        uploadUrl : "/SpringWind/sys/common/upload",
+        autoReplace : false,
+        maxFileCount : 5,
+        allowedFileExtensions : [ "jpg", "png", "gif" ],
+        browseClass : "btn btn-primary", //按钮样式
+        previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",
+        initialPreviewAsData: true, // 特别重要
+        initialPreviewFileType: 'image',
+        initialPreview:arr1, //要显示的图片的路径
+        initialPreviewConfig: [
+            {key:1,showDelete: false}
+        ]
+    }).on("fileuploaded", function(e, data) {
+        var res = data.response;
+        arr.push(res.success);
+        $("#imageId").attr("value", arr);
+        console.log(arr);
+    });
+
+
 
     $("#myForm").validator({
     valid: function(form){
