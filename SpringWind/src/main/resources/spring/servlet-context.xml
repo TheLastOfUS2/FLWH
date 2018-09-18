@@ -10,6 +10,9 @@
 	<!-- 扫描 controller -->
 	<context:component-scan base-package="com.baomidou.springwind.controller" />
 
+	<mvc:view-controller path="/" view-name="redirect:/front/home/toIndex"/>
+	<mvc:view-controller path="/admin" view-name="redirect:/account/login"/>
+
 	<!-- 定义视图解析器 -->
 	<bean id="velocityConfig"
 		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
@@ -50,7 +53,7 @@
 	<!-- 获取ApplicationContext上下文 -->
 	<bean id="springContextHolder" class="com.baomidou.framework.spring.SpringContextHolder" />
 
-	<!-- KISSO 初始化 -->
+	 <!--KISSO 初始化-->
 	<bean id="kissoInit" class="com.baomidou.kisso.web.WebKissoConfigurer" init-method="initKisso">
 		<property name="ssoPropPath" value="properties/sso.properties" />
 	</bean>
