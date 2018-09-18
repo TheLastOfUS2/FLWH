@@ -22,17 +22,24 @@ public class ServiceItem {
 
     private String serviceType;
 
-    private String insertTime;
+    private Date insertTime;
 
-    @TableField(exist = false)
-    private List<Image> imageList;
+    private String editText;
+
+    public String getEditText() {
+        return editText;
+    }
+
+    public void setEditText(String editText) {
+        this.editText = editText;
+    }
 
     public String getServiceItemId() {
         return serviceItemId;
     }
 
     public void setServiceItemId(String serviceItemId) {
-        this.serviceItemId = serviceItemId == null ? null : serviceItemId.trim();
+        this.serviceItemId = serviceItemId;
     }
 
     public String getTitleImage() {
@@ -40,7 +47,7 @@ public class ServiceItem {
     }
 
     public void setTitleImage(String titleImage) {
-        this.titleImage = titleImage == null ? null : titleImage.trim();
+        this.titleImage = titleImage;
     }
 
     public String getTitleText() {
@@ -48,7 +55,7 @@ public class ServiceItem {
     }
 
     public void setTitleText(String titleText) {
-        this.titleText = titleText == null ? null : titleText.trim();
+        this.titleText = titleText;
     }
 
     public String getDescribeText() {
@@ -56,7 +63,7 @@ public class ServiceItem {
     }
 
     public void setDescribeText(String describeText) {
-        this.describeText = describeText == null ? null : describeText.trim();
+        this.describeText = describeText;
     }
 
     public String getDescribeImage() {
@@ -64,7 +71,7 @@ public class ServiceItem {
     }
 
     public void setDescribeImage(String describeImage) {
-        this.describeImage = describeImage == null ? null : describeImage.trim();
+        this.describeImage = describeImage;
     }
 
     public String getServiceType() {
@@ -72,35 +79,14 @@ public class ServiceItem {
     }
 
     public void setServiceType(String serviceType) {
-        this.serviceType = serviceType == null ? null : serviceType.trim();
+        this.serviceType = serviceType;
     }
 
-    public String getInsertTime() {
+    public Date getInsertTime() {
         return insertTime;
     }
 
-    public void setInsertTime(String insertTime) {
-        this.insertTime = insertTime == null ? null : insertTime.trim();
-    }
-
-    public List<Image> getImageList() {
-        return imageList;
-    }
-
-    public void setImageList(List<Image> imageList) {
-        this.imageList = imageList;
-    }
-
-    @Override
-    public String toString() {
-        return "ServiceItem{" +
-                "serviceItemId='" + serviceItemId + '\'' +
-                ", titleImage='" + titleImage + '\'' +
-                ", titleText='" + titleText + '\'' +
-                ", describeText='" + describeText + '\'' +
-                ", describeImage='" + describeImage + '\'' +
-                ", serviceType='" + serviceType + '\'' +
-                ", insertTime='" + insertTime + '\'' +
-                '}';
+    public void setInsertTime(Date insertTime) {
+        this.insertTime = insertTime;
     }
 }

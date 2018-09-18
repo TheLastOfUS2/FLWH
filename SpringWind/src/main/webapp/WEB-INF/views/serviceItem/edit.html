@@ -11,279 +11,178 @@
     <script src="#springUrl('/static/js/fileinput.min.js')"></script>
     <script src="#springUrl('/static/js/locales/zh.js')"></script>
     <script src="#springUrl('/static/plugins/nice-validator-0.8.1/jquery.validator.js?local=zh-CN')"></script>
+    <style type="text/css">
+        .clear {
+            clear: both;
+        }
+    </style>
     <script type="text/javascript">
-        $(function () {
-            $(".selector").find("option[text='$!{serviceItem.serviceType}']").attr("selected", true);
-        })
+
     </script>
 </head>
 <body class="white-bg">
-<div class="ibox-content" style="width: 600px;">
-    <form id="myForm" class="form-horizontal" autocomplete="off" data-validator-option="{theme:'default'}">
-
-        <!--业务标题-->
-        <input type="hidden" id="serviceItemId" name="serviceItemId" value="$!{serviceItem.serviceItemId}">
-        <div class="form-group">
-            <label for="titleText" class="col-sm-2 control-label">业务标题</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="titleText" value="$!{serviceItem.titleText}"
-                       name="titleText" data-rule="用户名:required;loginName">
-            </div>
-        </div>
-
-        <div class="hr-line-dashed"></div>
-
-        <!--业务描述-->
-        <div class="form-group"><label class="col-sm-2 control-label">业务描述</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" rows="3" id="describeText" name="describeText">$!{serviceItem.describeText}</textarea>
-            </div>
-        </div>
-
-        <div class="hr-line-dashed"></div>
-
-        <!--业务类型-->
-        <div class="form-group"><label class="col-sm-2 control-label">业务类型</label>
-            <div class="col-sm-10">
-                <select class="form-control m-b selector" name="serviceType" id="serviceType">
-                    <option value="1" text="1">活动策划执行</option>
-                    <option value="2" text="2">会议承办</option>
-                    <option value="3" text="3">影视拍摄</option>
-                    <option value="4" text="4">视觉传达</option>
-                    <option value="5" text="5">新媒体互动营销</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="hr-line-dashed"></div>
-
-        <!--首图-->
-        <div class="form-group"><label class="col-sm-2 control-label">首图</label>
-            <div class="col-sm-10">
-                <input type="file" id="titleImage" name="titleImage" data-ref="url" class="file-loading"
-                       accept="image/jpeg" multiple/>
-                <p class="help-block">支持jpg格式，大小不超过2.0M</p>
-            </div>
-        </div>
-
-        <div class="hr-line-dashed"></div>
-
-        <!--详情中的商标图-->
-        <div class="form-group"><label class="col-sm-2 control-label">详情中的商标图</label>
-            <div class="col-sm-10">
-                <input type="file" id="describeImage" name="describeImage" data-ref="url" class="file-loading"
-                       accept="image/jpeg" multiple/>
-                <p class="help-block">支持jpg格式，大小不超过2.0M</p>
-            </div>
-        </div>
-
-        <div class="hr-line-dashed"></div>
-
-        <!--内容图片-->
-        <div class="form-group"><label class="col-sm-2 control-label">内容图片</label>
-            <div class="col-sm-10">
-                <input type="file" id="image" name="image" data-ref="url" class="file-loading"
-                       accept="image/jpeg" multiple/>
-                <p class="help-block">支持jpg格式，大小不超过2.0M</p>
-            </div>
-        </div>
-
-        <div class="hr-line-dashed"></div>
-
-        <div class="form-group">
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit">#if($!{user})修 改#else提 交#end</button>
-            </div>
-        </div>
+<div class="ibox-content" style="width: 800px;">
+   <form id="myForm" class="form-horizontal" autocomplete="off" data-validator-option="{theme:'default'}">
+       <input type="hidden" name="serviceItemId" value="$!{serviceItem.serviceItemId}">
+       <div class="form-group">
+           <label class="col-md-3 control-label">业务标题</label>
+           <div class="col-md-9">
+               <input id="titleText" type="text" class="form-control"  name="titleText"  value="$!{serviceItem.titleText}">
+           </div>
+       </div>
+       <div class="form-group">
+           <label class="col-md-3 control-label">业务描述</label>
+           <div class="col-md-9">
+               <textarea id="describeText" rows="3" class="form-control"  name="describeText">$!{serviceItem.describeText}</textarea>
+           </div>
+       </div>
+       <!--业务类型-->
+       <div class="form-group">
+           <label class="col-md-3 control-label">业务类型</label>
+           <div class="col-md-9">
+               <select class="form-control m-b" name="serviceType" id="serviceType">
+                   <option value="1" text="1">活动策划执行</option>
+                   <option value="2" text="2">会议承办</option>
+                   <option value="3" text="3">影视拍摄</option>
+                   <option value="4" text="4">视觉传达</option>
+                   <option value="5" text="5">新媒体互动营销</option>
+               </select>
+           </div>
+       </div>
+       <div class="form-group">
+           <label  class="col-md-3 control-label">首图</label>
+           <div class="col-md-9">
+               <input id="myFile" type="file" name="myFile" class="fileloading">
+           </div>
+           <input type="hidden" name="titleImage" id="titleImage"  value="$!{serviceItem.titleImage}">
+       </div>
+       <div class="form-group">
+           <label  class="col-md-3 control-label">商标图</label>
+           <div class="col-md-9">
+               <input id="myFiles" type="file" name="myFile" class="fileloading">
+           </div>
+           <input type="hidden" name="describeImage" id="describeImage"  value="$!{serviceItem.describeImage}">
+       </div>
+       <div class="form-group">
+           <label  class="col-md-3 control-label">内容</label>
+           <div class="col-md-9">
+               <script id="content" type="text/plain"></script>
+           </div>
+           <input name="editText" type="hidden" id="editText">
+       </div>
+       <div class="hr-line-dashed"></div>
+       <div class="form-group">
+           <div class="text-center">
+               <button class="btn btn-primary" type="submit">#if($!{serviceItem})修 改#else提 交#end</button>
+           </div>
+       </div>
     </form>
 </div>
-
+<!--<script type="text/javascript" charset="utf-8" src="../assets/plugins/ueditor/ueditor.config.js"></script>-->
+<!--<script type="text/javascript" charset="utf-8" src="../assets/plugins/ueditor/ueditor.all.js"> </script>-->
+<!--<script type="text/javascript" charset="utf-8" src="../assets/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>-->
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.js"></script>
 <script type="text/javascript">
-    var img = [];
-    img = "$!{image}".split(",");
+    $(function () {
+        var ue = UE.getEditor('content');
+        //异步回调
+        ue.ready(function() {
+            ue.setContent("");
+            var editTextOld = '${serviceItem.editText}';
+            console.log(editTextOld);
+            if (editTextOld!=="\${serviceItem.editText}".toString()){
+                ue.execCommand('inserthtml',editTextOld);
+            }
+        });
 
-    var TitleInput = function () {
-        var oFile = new Object();
-        //初始化fileinput控件（第一次初始化）
-        oFile.Init = function (ctrlName, uploadUrl) {
-            var control = $('#' + ctrlName);
-            control.fileinput({
-                language: 'zh',                                         //设置语言
-                uploadUrl: uploadUrl,                                   //上传的地址
-                allowedFileExtensions: ['jpg', 'png', 'jpeg', 'bmp'], //接收的文件后缀
-                showUpload: false,                                       //是否显示上传按钮
-                showCaption: true,                                     //是否显示标题
-                browseClass: "btn btn-primary",                         //按钮样式
-                dropZoneEnabled: false,                               //是否显示拖拽区域
-                maxFileSize: 2000,                                       //单位为kb，如果为0表示不限制文件大小
-                maxFileCount: 1,                                       //表示允许同时上传的最大文件个数
-                autoReplace: true,                                     //重新选择图片覆盖原图片
-                enctype: 'multipart/form-data',
-                validateInitialCount: true,
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-                layoutTemplates: {
-                    actionDrag: '',
-                    actionDelete: '',
-                    actionUpload: '',
-                    actionZoom: ''
-                },
-                overwriteInitial: true,
-                initialPreview: [
-                    "#springUrl("$!{serviceItem.titleImage}")"
-                ],
-                initialPreviewAsData: true,
-                initialPreviewFileType: 'image',
-                initialPreviewConfig: [
-                    {caption: "sadf.jpg", size: 576237, width: "120px", key: 1}
-                ],
-                uploadExtraData: function (previewId, index) {  //传参
-                    var data = {
-                        "name": ctrlName,
-                        "serviceItemId": $('#serviceItemId').val(),      //此处自定义传参
-                    };
-                    return data;
-                }
-            });
-            //导入文件上传完成之后的事件
-            $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-                //报告table刷新
-                console.log("1");
-            });
-        };
-        return oFile;
-    };
+        $(".selector").find("option[text='$!{serviceItem.serviceType}']").attr("selected", true);
 
-    var DescribeInput = function () {
-        var oFile = new Object();
-        //初始化fileinput控件（第一次初始化）
-        oFile.Init = function (ctrlName, uploadUrl) {
-            var control = $('#' + ctrlName);
-            control.fileinput({
-                language: 'zh',                                         //设置语言
-                uploadUrl: uploadUrl,                                   //上传的地址
-                allowedFileExtensions: ['jpg', 'png', 'jpeg', 'bmp'], //接收的文件后缀
-                showUpload: false,                                       //是否显示上传按钮
-                showCaption: true,                                     //是否显示标题
-                browseClass: "btn btn-primary",                         //按钮样式
-                dropZoneEnabled: false,                               //是否显示拖拽区域
-                maxFileSize: 2000,                                       //单位为kb，如果为0表示不限制文件大小
-                maxFileCount: 1,                                       //表示允许同时上传的最大文件个数
-                autoReplace: true,                                     //重新选择图片覆盖原图片
-                enctype: 'multipart/form-data',
-                validateInitialCount: true,
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-                layoutTemplates: {
-                    actionDrag: '',
-                    actionDelete: '',
-                    actionUpload: '',
-                    actionZoom: ''
-                },
-                overwriteInitial: true,
-                initialPreview: [
-                    "#springUrl("$!{serviceItem.describeImage}")"
-        ],
-                initialPreviewAsData: true,
-                initialPreviewFileType: 'image',
-                // initialPreviewConfig: [
-                //     {caption: "sadf.jpg", size: 576237, width: "120px", key: 1}
-                // ],
-                uploadExtraData: function (previewId, index) {  //传参
-                    var data = {
-                        "name": ctrlName,
-                        "serviceItemId": $('#serviceItemId').val(),      //此处自定义传参
-                    };
-                    return data;
-                }
-            });
-            //导入文件上传完成之后的事件
-            $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-                //报告table刷新
-                console.log("1");
-            });
-        };
-        return oFile;
-    };
 
-    var ImageInput = function () {
-        var oFile = new Object();
-        //初始化fileinput控件（第一次初始化）
-        oFile.Init = function (ctrlName, uploadUrl) {
-            var control = $('#' + ctrlName);
-            control.fileinput({
-                language: 'zh',                                         //设置语言
-                uploadUrl: uploadUrl,                                   //上传的地址
-                allowedFileExtensions: ['jpg', 'png', 'jpeg', 'bmp'], //接收的文件后缀
-                showUpload: false,                                       //是否显示上传按钮
-                showCaption: true,                                     //是否显示标题
-                browseClass: "btn btn-primary",                         //按钮样式
-                dropZoneEnabled: false,                               //是否显示拖拽区域
-                maxFileSize: 2000,                                       //单位为kb，如果为0表示不限制文件大小
-                maxFileCount: 10,                                       //表示允许同时上传的最大文件个数
-                enctype: 'multipart/form-data',
-                validateInitialCount: true,
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-                layoutTemplates: {
-                    // actionDrag: '',
-                    actionUpload: '',
-                    actionZoom: ''
-                },
-                overwriteInitial: false,
-                initialPreview: img,
-                initialPreviewConfig: [
-                    {caption: "sadf.jpg", size: 576237, width: "120px", key: 1}
-                ],
-                initialPreviewAsData: true,
-                initialPreviewFileType: 'image',
-                uploadExtraData: function (previewId, index) {           //传参
-                    var data = {
-                        "name": ctrlName,
-                        "serviceItemId": $('#serviceItemId').val(),
-                    };
-                    return data;
-                }
-            });
-            //导入文件上传完成之后的事件
-            $("#titleImage").on("fileuploaded", function (event, data, previewId, index) {
-                //报告table刷新
-                console.log("1");
-            });
-        };
-        return oFile;
-    };
+    });
 
-    var titleImage = new TitleInput();
-    var describeImage = new DescribeInput();
-    var image = new ImageInput();
+    var path = [];
+    path.push($("#titleImage").val());
 
-    titleImage.Init("titleImage", "/SpringWind/sys/serviceItem/editTitleImage");
-    describeImage.Init("describeImage", "/SpringWind/sys/serviceItem/editDescribeImage");
-    image.Init("image", "/SpringWind/sys/serviceItem/editImage");
+    var paths = [];
+    paths.push($("#describeImage").val());
+
+    $("#myFile").fileinput({
+        language : 'zh',
+        uploadUrl : "/SpringWind/sys/common/upload",
+        autoReplace : true,
+        maxFileCount : 1,
+        allowedFileExtensions : [ "jpg", "png", "gif" ],
+        browseClass : "btn btn-primary", //按钮样式
+        previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",
+        initialPreviewAsData: true, // 特别重要
+        initialPreviewFileType: 'image',
+        initialPreview:path, //要显示的图片的路径
+        initialPreviewConfig: [
+            {key:1,showDelete: false}
+        ]
+    }).on("fileuploaded", function(e, data) {
+        var res = data.response;
+        $("#titleImage").attr("value", res.success);
+        console.log("1111");
+    });
+
+    $("#myFiles").fileinput({
+        language : 'zh',
+        uploadUrl : "/SpringWind/sys/common/upload",
+        autoReplace : true,
+        maxFileCount : 1,
+        allowedFileExtensions : [ "jpg", "png", "gif" ],
+        browseClass : "btn btn-primary", //按钮样式
+        previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",
+        initialPreviewAsData: true, // 特别重要
+        initialPreviewFileType: 'image',
+        initialPreview:paths, //要显示的图片的路径
+        initialPreviewConfig: [
+            {key:1,showDelete: false}
+        ]
+    }).on("fileuploaded", function(e, data) {
+        var res = data.response;
+        $("#describeImage").attr("value", res.success);
+        console.log("2222");
+    });
 
     $("#myForm").validator({
-        valid: function (form) {
-            var me = this;
-            // 提交表单之前，hold住表单，防止重复提交
-            me.holdSubmit();
-            $.ajax({
-                url: "#springUrl('/sys/serviceItem/editServiceItem')",
-                data: $(form).serialize(),
-                type: "POST",
-                success: function (data) {
-                    console.log(data);
-                    if (data) {
-                        $('#titleImage').fileinput('upload');
-                        console.log("");
-                        $('#describeImage').fileinput('upload');
-                        // $('#image').fileinput('upload');
-                        window.parent.location.reload();
-                    }
-                }
-            });
+    valid: function(form){
+        var me = this;
+        me.holdSubmit();
+        // 提交表单之前，hold住表单，防止重复提交
+        if (!UE.getEditor('content').hasContents()){
+            alert('请先填写内容!');
+        }else{
+            var editText=UE.getEditor('content').getContent();
+            $("#editText").attr("value", editText);
+            $("#myForm").validator();
         }
-    });
+        if ($("#titleImage").val()===""||$("#describeImage").val()===""){
+            var flag = confirm("您上传的图片有可能没有提交，是否继续");
+            if (!flag){
+                me.holdSubmit(false);
+                return;
+            }
+        }
+        $.ajax({
+        	url: "#springUrl('/sys/serviceItem/editServiceItem')",
+            data: $(form).serialize(),
+            type: "POST",
+            success: function(data){
+            	var d = JSON.parse(data);
+                if(d.success && d.data){
+                	window.parent.location.reload();
+                } else {
+                	//失败，提交表单成功后，释放hold，如果不释放hold，就变成了只能提交一次的表单
+                    me.holdSubmit(false);
+                }
+            }
+        });
+    }
+});
+
 </script>
 </body>
 </html>

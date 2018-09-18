@@ -1,11 +1,11 @@
 #override("title")
-SpringWind - 峰岚业务
+SpringWind - 业务管理
 #end
 #override("css")
 <link href="#springUrl('/static/css/plugins/bootstrap-table/bootstrap-table.min.css')" rel="stylesheet">
 #end
 #override("breadcrumb")
-<li><a>峰岚业务</a></li><li class="active"><strong>业务管理</strong></li>
+<li><a>业务管理</a></li><li class="active"><strong>业务管理</strong></li>
 #end
 #override("content")
 <div class="row">
@@ -16,7 +16,7 @@ SpringWind - 峰岚业务
 				<button type="button" class="btn btn-info">搜索</button>
 			</span>
         </div>
-        <button class="btn btn-primary" onclick="editUser(null)" type="button">
+        <button class="btn btn-primary" onclick="editServiceItem(null)" type="button">
             <i class="fa fa-pencil"></i>&nbsp;添加业务</button>
     </div>
 </div>
@@ -40,20 +40,39 @@ SpringWind - 峰岚业务
         title: '序号'
     }, {
         field: 'titleText',
-        title: '业务名称'
+        title: '业务标题'
     }, {
         field: 'serviceType',
-        title: '业务类型'
+        title: '业务类型',
+        formatter: function (value, row, index) {
+            if (row.serviceType==1){
+                return "活动策划执行";
+            }else if (row.serviceType==2){
+                return "会议承办";
+            }else if (row.serviceType==3){
+                return "影视拍摄";
+            }else if (row.serviceType==4){
+                return "视觉传达";
+            }else if (row.serviceType==5){
+                return "新媒体互动营销";
+            }else {
+                return "--";
+            }
+        }
     }, {
         field: 'insertTime',
-        title: '创建时间'
-    }, {
+        title: '添加时间',
+        formatter: function (value, row, index) {
+            return formatDate(row.insertTime);
+        }
+    },{
         title: '操作',
         formatter: function (value, row, index) {
             var id = row.serviceItemId;
-            return '<a class="btn btn-xs btn-warning" onclick="editUser(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>编辑</a> '
+            return '<a class="btn btn-xs btn-warning" onclick="editServiceItem(' + "'" + id + "'" + ')"><i class="fa fa-pencil"></i>编辑</a> '
+                <!-- 此处按钮级别权限控制，目前只有 admin 拥有该权限！ -->
             #if($SSOPermission.isActionable("10010"))
-            + '<a class="btn btn-xs btn-danger" onclick="delUser(' + "'" + id + "'" + ')"><i class="fa fa-remove"></i>删除</a>'
+            + '<a class="btn btn-xs btn-danger" onclick="delServiceItem(' + "'" + id + "'" + ')"><i class="fa fa-remove"></i>删除</a>'
             #end;
         }
     }
@@ -65,14 +84,14 @@ SpringWind - 峰岚业务
         };
     }
 
-    function delUser(serviceItemId) {
+    function delServiceItem(id) {
         //询问框
         layer.confirm('确定删除吗？', {
             btn: ['确定', '取消'] //按钮
         }, function () {
             $.ajax({
                 type: "POST",
-                url: "#springUrl('/sys/serviceItem/delServiceItem/')" + serviceItemId,
+                url: "#springUrl('/sys/serviceItem/delServiceItem/')" + id,
                 datatype: "text",
                 success: function (data) {
                     if(data == 'true'){
@@ -86,12 +105,11 @@ SpringWind - 峰岚业务
         });
     }
 
-    function editUser(id){
-        var title = "新增用户";
-        var url = "#springUrl('/sys/serviceItem/add.html')";
+    function editServiceItem(id){
+        var title = "新增业务";
+        var url = "#springUrl('/sys/serviceItem/edit.html')";
         if(id!=null){
-            url = "#springUrl('/sys/serviceItem/edit.html')";
-            title = "编辑用户";
+            title = "编辑业务";
             url = url + "?id=" + id;
         }
         layer.open({
@@ -99,10 +117,10 @@ SpringWind - 峰岚业务
             title: title,
             shadeClose: true,
             shade: 0.8,
-            area: ['700px', '430px'],
+            area: ['820px', '700px'],
             fix: false,
             maxmin: true,
-            content: url,
+            content: url
         });
     }
 </script>

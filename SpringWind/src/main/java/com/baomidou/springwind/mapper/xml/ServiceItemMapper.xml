@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.baomidou.springwind.mapper.ServiceItemDao">
-    <resultMap id="BaseResultMap" type="com.baomidou.springwind.entity.ServiceItem">
-        <id column="serviceItemId" property="serviceItemId" jdbcType="VARCHAR"/>
-        <result column="titleImage" property="titleImage" jdbcType="VARCHAR"/>
-        <result column="titleText" property="titleText" jdbcType="VARCHAR"/>
-        <result column="describeText" property="describeText" jdbcType="VARCHAR"/>
-        <result column="describeImage" property="describeImage" jdbcType="VARCHAR"/>
-        <result column="serviceType" property="serviceType" jdbcType="VARCHAR"/>
-        <collection property="imageList" ofType="Image">
-            <id column="imageId" property="imageId"/>
-            <result column="imageUrl" property="imageUrl"/>
-            <result column="imageDescribe" property="imageDescribe"/>
-            <result column="itemId" property="itemId"/>
-        </collection>
-    </resultMap>
-    <select id="selectByServiceItemId" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        serviceItemId,titleImage,titleText,describeImage,describeText,serviceType,imageId,imageUrl,imageDescribe,itemId
-        from service_item,image
-        where serviceItemId = #{id,jdbcType=VARCHAR} and serviceItemId = itemId
-    </select>
+
 </mapper>

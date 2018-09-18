@@ -19,6 +19,7 @@
                 type: "POST",
                 success: function (data) {
                     var d = JSON.parse(data);
+                    console.log(d);
                     if (d.result != null) {
                         $(".art0").html(d.result.editText);
                         var imageLunBo = "";
@@ -34,7 +35,151 @@
                     }
                 }
             });
-        })
+
+            var serviceType = sessionStorage.getItem("serviceType");
+            if (serviceType != ""&&serviceType!=null){
+                partOfServiceItem(serviceType);
+            } else {
+                $.ajax({
+                    url: "#springUrl('/sys/serviceItem/getServiceItemListForFront')",
+                    type: "POST",
+                    success: function (data) {
+                        var d = JSON.parse(data);
+                        console.log(d);
+                        var serviceItemList = d.rows;
+                        var serviceItemOne = '';
+                        if (serviceItemList != null && serviceItemList.length !== 0) {
+                            console.log(serviceItemList);
+                            for (var i=0;i < serviceItemList.length;i++){
+                                var serviceItemOfList=serviceItemList[i];
+                                var serviceTypeName = serviceItemOfList.serviceType;
+                                if (serviceTypeName==1){
+                                    serviceTypeName = "活动策划执行";
+                                }else if (serviceTypeName==2){
+                                    serviceTypeName = "会议承办";
+                                }else if (serviceTypeName==3){
+                                    serviceTypeName = "影视拍摄";
+                                }else if (serviceTypeName==4){
+                                    serviceTypeName = "视觉传达";
+                                }else if (serviceTypeName==5){
+                                    serviceTypeName = "新媒体互动营销";
+                                }
+                                serviceItemOne = serviceItemOne +
+                                    "<div class='art2-div'>" +
+                                    "<a href='javascript:void(0);' onclick='goServiceItem(" + '"' + serviceItemOfList.serviceItemId + '"' + ")' class='art2-a'><img src='"+(serviceItemOfList.titleImage)+"' alt=''/></a>" +
+                                    "<a href='javascript:void(0);' onclick='goServiceItem(" + '"' + serviceItemOfList.serviceItemId + '"' + ")' >" +
+                                    "<p class='art2-p'>" +
+                                    "<span>"+(serviceTypeName)+"</span>" +
+                                    "<span>"+(serviceItemOfList.titleText)+"</span>" +
+                                    "</p>" +
+                                    "</a>" +
+                                    "</div>";
+                            }
+                            $(".art2").append(serviceItemOne);
+                            $(".art2").append('<p style="clear:both"></p>');
+                            // 图片部分移入移出
+                            $(".art2-div").each(function(index, el) {
+                                var i = index;
+                                $(this).mouseover(function(event) {
+                                    $(".art2-p").each(function(index, el) {
+                                        $(this).hide();
+                                    });
+                                    $(".art2-p").eq(i).show().css('background-color', 'rgba(28,42,78,0.8)');
+                                    $(".art2-a img").eq(i).addClass('dong');
+                                });
+                                $(this).mouseout(function(event) {
+                                    $(".art2-p").each(function(index, el) {
+                                        $(this).hide();
+                                    });
+                                    $(".art2-p").hide();
+                                    $(".art2-p").eq(i).hide();
+                                    $(".art2-a img").eq(i).removeClass('dong');
+                                });
+                            });
+                            var imgheight = $(".art2-a img").width();
+                            var imgheight1 = Math.floor(imgheight*500/605);
+                            $(".art2-p").css('height', imgheight1);
+
+                        }
+                    }
+                });
+            }
+
+
+        });
+
+        function goServiceItem(serviceItemId) {
+            console.log(serviceItemId);
+            sessionStorage.setItem("serviceItemId",serviceItemId);
+            window.location.href="#springUrl('/front/flService/toServiceItem')";
+        };
+
+        function partOfServiceItem(id) {
+            $(".art2").empty();
+            $.ajax({
+                url: "#springUrl('/sys/serviceItem/getServiceItemListForFront')",
+                data : {serviceType:id},
+                type: "POST",
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    console.log(d);
+                    var serviceItemList = d.rows;
+                    var serviceItemOne = '';
+                    if (serviceItemList != null && serviceItemList.length !== 0) {
+                        console.log(serviceItemList);
+                        for (var i=0;i < serviceItemList.length;i++){
+                            var serviceItemOfList=serviceItemList[i];
+                            var serviceTypeName = serviceItemOfList.serviceType;
+                            if (serviceTypeName==1){
+                                serviceTypeName = "活动策划执行";
+                            }else if (serviceTypeName==2){
+                                serviceTypeName = "会议承办";
+                            }else if (serviceTypeName==3){
+                                serviceTypeName = "影视拍摄";
+                            }else if (serviceTypeName==4){
+                                serviceTypeName = "视觉传达";
+                            }else if (serviceTypeName==5){
+                                serviceTypeName = "新媒体互动营销";
+                            }
+                            serviceItemOne = serviceItemOne +
+                                "<div class='art2-div'>" +
+                                "<a href='javascript:void(0);' onclick='goServiceItem(" + '"' + serviceItemOfList.serviceItemId + '"' + ")' class='art2-a'><img src='"+(serviceItemOfList.titleImage)+"' alt=''/></a>" +
+                                "<a href='javascript:void(0);' onclick='goServiceItem(" + '"' + serviceItemOfList.serviceItemId + '"' + ")' >" +
+                                "<p class='art2-p'>" +
+                                "<span>"+(serviceTypeName)+"</span>" +
+                                "<span>"+(serviceItemOfList.titleText)+"</span>" +
+                                "</p>" +
+                                "</a>" +
+                                "</div>";
+                        }
+                        $(".art2").append(serviceItemOne);
+                        $(".art2").append('<p style="clear:both"></p>');
+                        // 图片部分移入移出
+                        $(".art2-div").each(function(index, el) {
+                            var i = index;
+                            $(this).mouseover(function(event) {
+                                $(".art2-p").each(function(index, el) {
+                                    $(this).hide();
+                                });
+                                $(".art2-p").eq(i).show().css('background-color', 'rgba(28,42,78,0.8)');
+                                $(".art2-a img").eq(i).addClass('dong');
+                            });
+                            $(this).mouseout(function(event) {
+                                $(".art2-p").each(function(index, el) {
+                                    $(this).hide();
+                                });
+                                $(".art2-p").hide();
+                                $(".art2-p").eq(i).hide();
+                                $(".art2-a img").eq(i).removeClass('dong');
+                            });
+                        });
+                        var imgheight = $(".art2-a img").width();
+                        var imgheight1 = Math.floor(imgheight*500/605);
+                        $(".art2-p").css('height', imgheight1);
+                    }
+                }
+            });
+        }
     </script>
     <link rel="stylesheet" href="../../front/css/anlinei.css"/>
     <link rel="stylesheet" href="../../front/css/head-foot.css"/>
@@ -112,81 +257,26 @@
         </div>
         <!-- 导航部分 -->
         <p class="art1">
-            <a href="anlinei.html" class="art11">作品案例 ｜</a>
-            <a href="anlinei.html" class="xs">活动策划执行</a>
-            <a href="anlinei1.html">会议承办</a>
-            <a href="anlinei2.html">影视拍摄</a>
-            <a href="anlinei3.html">视觉传达</a>
-            <a href="anlinei4.html">新媒体互动营销</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem()" class="art11">作品案例 ｜</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(1)" class="xs">活动策划执行</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(2)">会议承办</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(3)">影视拍摄</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(4)">视觉传达</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(5)">新媒体互动营销</a>
         </p>
         <!-- 手机版 -->
         <div class="sj-art1">
-            <a href="anlinei.html" class="sj-art11">作品案例 ｜</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem()" class="sj-art11">作品案例 ｜</a>
             <div class="sj-art12">
-                <a href="anlinei.html" class="xs">活动策划执行</a>
-                <a href="anlinei1.html">会议承办</a>
-                <a href="anlinei2.html">影视拍摄</a>
-                <a href="anlinei3.html">视觉传达</a>
-                <a href="anlinei4.html">新媒体互动营销</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(1)" class="xs">活动策划执行</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(2)">会议承办</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(3)">影视拍摄</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(4)">视觉传达</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(5)">新媒体互动营销</a>
             </div>
         </div>
         <!-- 图片部分 -->
         <div class="art2">
-            <div class="art2-div">
-                <a href="" class="art2-a"><img src="../../front/images/1huodong/1/index.jpg" alt=""/></a>
-                <a href="anlixiang.html">
-                    <p class="art2-p">
-                        <span>活动策划执行</span>
-                        <span>2015马克西姆古典音乐会</span>
-                    </p>
-                </a>
-            </div>
-            <div class="art2-div">
-                <a href="" class="art2-a"><img src="../../front/images/1huodong/2/index.jpg" alt=""/></a>
-                <a href="anlixiang1.html">
-                    <p class="art2-p">
-                        <span>活动策划执行</span>
-                        <span>2015年儿童剧现场</span>
-                    </p>
-                </a>
-            </div>
-            <div class="art2-div">
-                <a href="" class="art2-a"><img src="../../front/images/1huodong/3/index.jpg" alt=""/></a>
-                <a href="anlixiang2.html">
-                    <p class="art2-p">
-                        <span>活动策划执行</span>
-                        <span>2016年儿童剧现场</span>
-                    </p>
-                </a>
-            </div>
-            <div class="art2-div">
-                <a href="" class="art2-a"><img src="../../front/images/1huodong/4/index.jpg" alt=""/></a>
-                <a href="anlixiang3.html">
-                    <p class="art2-p">
-                        <span>活动策划执行</span>
-                        <span>2016 大工青友会2周年庆典</span>
-                    </p>
-                </a>
-            </div>
-            <div class="art2-div">
-                <a href="" class="art2-a"><img src="../../front/images/1huodong/5/index.jpg" alt=""/></a>
-                <a href="anlixiang4.html">
-                    <p class="art2-p">
-                        <span>活动策划执行</span>
-                        <span>2017 大工青友会3周年庆典</span>
-                    </p>
-                </a>
-            </div>
-            <div class="art2-div">
-                <a href="" class="art2-a"><img src="../../front/images/1huodong/6/index.jpg" alt=""/></a>
-                <a href="anlixiang5.html">
-                    <p class="art2-p">
-                        <span>活动策划执行</span>
-                        <span>2017年金晟科技年会</span>
-                    </p>
-                </a>
-            </div>
-            <p style="clear:both"></p>
         </div>
 
 

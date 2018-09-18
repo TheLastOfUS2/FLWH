@@ -10,4 +10,9 @@ public class FLServiceController {
     public String toFLService(){
         return "/front/anlinei";
     }
+
+    @RequestMapping("/toServiceItem")
+    public String toServiceItem(){
+        return "/front/anlixiang";
+    }
 }
