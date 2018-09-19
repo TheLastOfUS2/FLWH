@@ -11,7 +11,9 @@ import com.baomidou.springwind.entity.SecondMenu;
 import com.baomidou.springwind.entity.ext.SecondMenuExt;
 import com.baomidou.springwind.service.INewsItemService;
 import com.baomidou.springwind.service.ISecondMenuService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,19 +47,8 @@ public class NewsItemController extends BaseController {
         EntityWrapper ew=new EntityWrapper();
         ew.setEntity(new NewsItem());
         ew.orderBy("insertTime",false);
-        return jsonPage(newsItemService.selectPage(page, ew));
-    }
-
-    @ResponseBody
-    @Login(action = Action.Skip)
-    @Permission(action = Action.Skip)
-    @RequestMapping("/getNewsItemListForFront")
-    public String getNewsItemListForFront() {
-        Page<NewsItem> page = getPage();
-        EntityWrapper ew=new EntityWrapper();
-        ew.setEntity(new NewsItem());
-        ew.orderBy("insertTime",false);
-        return jsonPage(newsItemService.selectPage(page, ew));
+        Page<NewsItem> newsItemPage = newsItemService.selectPage(page, ew);
+        return jsonPage(newsItemPage);
     }
 
     @ResponseBody
