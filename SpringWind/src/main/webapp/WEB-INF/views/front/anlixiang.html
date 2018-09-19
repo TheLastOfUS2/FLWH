@@ -20,6 +20,7 @@
                         var d = JSON.parse(data);
                         if (d.result != null) {
                             $(".art0").html(d.result.editText);
+                            $(".sj-art0").html(d.result.editText);
                             var imageLunBo = "";
                             var imageList = d.result.imageId.split(",");
                             console.log(imageList);
