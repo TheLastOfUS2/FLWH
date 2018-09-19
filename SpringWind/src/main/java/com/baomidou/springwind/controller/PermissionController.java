@@ -1,5 +1,11 @@
 package com.baomidou.springwind.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.kisso.annotation.Action;
+import com.baomidou.kisso.annotation.Login;
+import com.baomidou.mybatisplus.enums.SqlLike;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +17,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.Permission;
 import com.baomidou.springwind.service.IPermissionService;
 import com.baomidou.springwind.service.IRolePermissionService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -54,6 +62,26 @@ public class PermissionController extends BaseController {
 			return "false";
 		}
 		return booleanToString(permissionService.deleteById(permId));
+	}
+
+	@ResponseBody
+	@Login(action = Action.Skip)
+	@com.baomidou.kisso.annotation.Permission(action = Action.Skip)
+	@RequestMapping("/search_results")
+	public JSONObject search_results(String topSearch) {
+		JSONObject jsonObject = new JSONObject();
+		EntityWrapper ew=new EntityWrapper();
+		ew.setEntity(new Permission());
+		if (!StringUtils.isEmpty(topSearch)) {
+			ew.eq("state",'0');
+			ew.like("title", topSearch, SqlLike.DEFAULT);
+			List<Permission> permissions = permissionService.selectList(ew);
+			if (permissions!=null&&permissions.size()!=0){
+				jsonObject.put("data",permissions.get(0).getUrl());
+				return jsonObject;
+			}
+		}
+		return null;
 	}
 
 }

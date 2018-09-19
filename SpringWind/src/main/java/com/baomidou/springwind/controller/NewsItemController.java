@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Login;
 import com.baomidou.kisso.annotation.Permission;
+import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.NewsItem;
@@ -42,14 +43,17 @@ public class NewsItemController extends BaseController {
     @ResponseBody
     @Permission("1005")
     @RequestMapping("/getNewsItemList")
-    public String getNewsItemList() {
+    public String getNewsItemList(String searchItem) {
         Page<NewsItem> page = getPage();
         EntityWrapper ew=new EntityWrapper();
         ew.setEntity(new NewsItem());
         ew.orderBy("insertTime",false);
-        Page<NewsItem> newsItemPage = newsItemService.selectPage(page, ew);
-        return jsonPage(newsItemPage);
+        if (!StringUtils.isEmpty(searchItem)) {
+            ew.like("titleText", searchItem, SqlLike.DEFAULT);
+        }
+        return jsonPage(newsItemService.selectPage(page, ew));
     }
+
 
     @ResponseBody
     @Login(action = Action.Skip)

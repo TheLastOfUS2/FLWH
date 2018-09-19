@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.kisso.annotation.Action;
 import com.baomidou.kisso.annotation.Login;
 import com.baomidou.kisso.annotation.Permission;
+import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.springwind.entity.ServiceItem;
@@ -37,11 +38,14 @@ public class ServiceItemController extends BaseController {
     @ResponseBody
     @Permission("1005")
     @RequestMapping("/getServiceItemList")
-    public String getServiceItemList() {
+    public String getServiceItemList(String searchItem) {
         Page<ServiceItem> page = getPage();
         EntityWrapper ew=new EntityWrapper();
         ew.setEntity(new ServiceItem());
         ew.orderBy("insertTime",false);
+        if (!StringUtils.isEmpty(searchItem)) {
+            ew.like("titleText", searchItem, SqlLike.DEFAULT);
+        }
         return jsonPage(serviceItemService.selectPage(page, ew));
     }
 
