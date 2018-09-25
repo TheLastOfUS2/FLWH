@@ -28,7 +28,7 @@
                 }
             });
             $.ajax({
-                url: "#springUrl('/sys/newsItem/getNewsItemList')",
+                url: "#springUrl('/sys/newsItem/getNewsItemForFront')",
                 type: "POST",
                 success: function (data) {
                     var d = JSON.parse(data);
@@ -56,7 +56,7 @@
                             },onPageClicked: function(event, originalEvent, type, page){
                                 var _index = parseInt(page)*10-1;
                                 $.ajax({
-                                    url: "#springUrl('/sys/newsItem/getNewsItemList')",
+                                    url: "#springUrl('/sys/newsItem/getNewsItemForFront')",
                                     data:{"_index":_index,"_size":10},
                                     type: "POST",
                                     success: function (data) {

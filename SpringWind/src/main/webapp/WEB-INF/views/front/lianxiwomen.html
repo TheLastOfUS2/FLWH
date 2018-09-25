@@ -53,7 +53,11 @@
             success: function (data) {
                 var d = JSON.parse(data);
                 if (d.result!=null){
-                    $(".conter").css({"background-image":"url("+(d.result.backgroundImg)+")"})
+                    if ($(window).width()>600){
+                        $(".conter").css({"background-image":"url("+(d.result.backgroundImg)+")"})
+                    } else {
+                        $(".conter").css({"background-image":"url("+(d.result.backgroundImgPhone)+")"})
+                    }
                     $(".art3").html(d.result.editText);
                 }
             }

@@ -59,7 +59,19 @@ public class NewsItemController extends BaseController {
     @Login(action = Action.Skip)
     @Permission(action = Action.Skip)
     @RequestMapping("/getNewsItemForFront")
-    public JSONObject getNewsItemForFront(String newsItemId) {
+    public String getNewsItemForFront() {
+        Page<NewsItem> page = getPage();
+        EntityWrapper ew=new EntityWrapper();
+        ew.setEntity(new NewsItem());
+        ew.orderBy("insertTime",false);
+        return jsonPage(newsItemService.selectPage(page, ew));
+    }
+
+    @ResponseBody
+    @Login(action = Action.Skip)
+    @Permission(action = Action.Skip)
+    @RequestMapping("/getNewsItemOneForFront")
+    public JSONObject getNewsItemOneForFront(String newsItemId) {
         NewsItem newsItem = newsItemService.selectById(newsItemId);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("data",newsItem);

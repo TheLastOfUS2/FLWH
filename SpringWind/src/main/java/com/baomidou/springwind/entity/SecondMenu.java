@@ -26,7 +26,17 @@ public class SecondMenu {
 
     private String backgroundImg;
 
+    private String backgroundImgPhone;
+
     private String editText;
+
+    public String getBackgroundImgPhone() {
+        return backgroundImgPhone;
+    }
+
+    public void setBackgroundImgPhone(String backgroundImgPhone) {
+        this.backgroundImgPhone = backgroundImgPhone;
+    }
 
     public String getEditText() {
         return editText;

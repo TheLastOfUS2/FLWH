@@ -14,7 +14,7 @@
         var newsItemId = sessionStorage.getItem("newsItemId");
         $(function () {
             $.ajax({
-                url: "#springUrl('/sys/newsItem/getNewsItemForFront')",
+                url: "#springUrl('/sys/newsItem/getNewsItemOneForFront')",
                 type: "POST",
                 data:{newsItemId:newsItemId},
                 success: function (data) {

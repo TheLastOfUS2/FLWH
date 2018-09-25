@@ -20,8 +20,11 @@
                 success: function (data) {
                     var d = JSON.parse(data);
                     if (d.result!=null){
-                        $(".conter").css({"background-image":"url("+(d.result.backgroundImg)+")"})
-                        $(".art3").html(d.result.editText);
+                        if ($(window).width()>600){
+                            $(".conter").css({"background-image":"url("+(d.result.backgroundImg)+")"})
+                        } else {
+                            $(".conter").css({"background-image":"url("+(d.result.backgroundImgPhone)+")"})
+                        }
                     }
                 }
             });
