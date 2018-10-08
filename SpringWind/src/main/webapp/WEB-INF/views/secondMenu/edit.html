@@ -59,7 +59,7 @@
        #else
        <div class="form-group"></div>
        #end
-       #if($!{secondMenu.secondMenuId}!=4&&$!{secondMenu.secondMenuId}!=1)
+       #if($!{secondMenu.secondMenuId}!=4&&$!{secondMenu.secondMenuId}!=1&&$!{secondMenu.secondMenuId}!=3)
        <div class="form-group">
            <label  class="col-md-3 control-label">二级菜单介绍</label>
            <div class="col-md-9">
@@ -87,7 +87,7 @@
 <script type="text/javascript">
     $(function () {
         var secondMenuId = $("#secondMenuId").val();
-        if (secondMenuId!=4&&secondMenuId!=1){
+        if (secondMenuId!=4&&secondMenuId!=1&&secondMenuId!=3){
             var ue = UE.getEditor('content',{
                 toolbars: [[//工具条
                     'anchor', //锚点
@@ -260,7 +260,7 @@
         var me = this;
         // 提交表单之前，hold住表单，防止重复提交
         me.holdSubmit();
-        if (secondMenuId != 4&&secondMenuId!=1) {
+        if (secondMenuId != 4&&secondMenuId!=1&&secondMenuId!=3) {
             if (!UE.getEditor('content').hasContents()){
                 alert('请先填写内容!');
             }else{

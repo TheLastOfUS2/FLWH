@@ -837,9 +837,7 @@
       <Engine>MyISAM</Engine>
       <Collation>utf8_bin</Collation>
     </table>
-    <table id="213" parent="7" name="second_menu">
-      <Collation>latin1_swedish_ci</Collation>
-    </table>
+    <table id="213" parent="7" name="second_menu"/>
     <table id="214" parent="7" name="service_item"/>
     <table id="215" parent="7" name="sys_log">
       <Comment>操作日志表</Comment>
@@ -1121,63 +1119,73 @@
     </column>
     <column id="263" parent="213" name="editText">
       <Position>11</Position>
-      <DataType>varchar(1000)|0s</DataType>
+      <DataType>varchar(4000)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="264" parent="213" name="PRIMARY">
+    <column id="264" parent="213" name="new_column">
+      <Position>12</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="265" parent="213" name="backgroundImgPhone">
+      <Position>13</Position>
+      <DataType>varchar(72)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="266" parent="213" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>secondMenuId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="265" parent="214" name="serviceItemId">
+    <column id="267" parent="214" name="serviceItemId">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="214" name="titleImage">
+    <column id="268" parent="214" name="titleImage">
       <Position>2</Position>
       <DataType>varchar(72)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="267" parent="214" name="titleText">
+    <column id="269" parent="214" name="titleText">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="214" name="describeText">
+    <column id="270" parent="214" name="describeText">
       <Position>4</Position>
       <DataType>varchar(1000)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="214" name="describeImage">
+    <column id="271" parent="214" name="describeImage">
       <Position>5</Position>
       <DataType>varchar(72)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="214" name="serviceType">
+    <column id="272" parent="214" name="serviceType">
       <Position>6</Position>
       <DataType>varchar(36)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="214" name="insertTime">
+    <column id="273" parent="214" name="insertTime">
       <Position>7</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="214" name="editText">
+    <column id="274" parent="214" name="editText">
       <Position>8</Position>
       <DataType>varchar(2000)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="273" parent="214" name="PRIMARY">
+    <key id="275" parent="214" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>serviceItemId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="274" parent="215" name="id">
+    <column id="276" parent="215" name="id">
       <Position>1</Position>
       <Comment>主键</Comment>
       <DataType>bigint(20) unsigned|0s</DataType>
@@ -1185,13 +1193,13 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="215" name="uid">
+    <column id="277" parent="215" name="uid">
       <Position>2</Position>
       <Comment>用户ID</Comment>
       <DataType>bigint(20) unsigned|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="215" name="content">
+    <column id="278" parent="215" name="content">
       <Position>3</Position>
       <Comment>日志内容</Comment>
       <DataType>varchar(600)|0s</DataType>
@@ -1199,52 +1207,52 @@
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="215" name="operation">
+    <column id="279" parent="215" name="operation">
       <Position>4</Position>
       <Comment>用户操作</Comment>
       <DataType>varchar(250)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="215" name="crTime">
+    <column id="280" parent="215" name="crTime">
       <Position>5</Position>
       <Comment>创建时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="279" parent="215" name="PRIMARY">
+    <key id="281" parent="215" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="280" parent="216" name="id">
+    <column id="282" parent="216" name="id">
       <Position>1</Position>
       <Comment>主键ID</Comment>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="216" name="loginName">
+    <column id="283" parent="216" name="loginName">
       <Position>2</Position>
       <Comment>登录名称</Comment>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="216" name="password">
+    <column id="284" parent="216" name="password">
       <Position>3</Position>
       <Comment>密码</Comment>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="216" name="email">
+    <column id="285" parent="216" name="email">
       <Position>4</Position>
       <Comment>邮箱</Comment>
       <DataType>varchar(60)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="216" name="type">
+    <column id="286" parent="216" name="type">
       <Position>5</Position>
       <Comment>0、普通用户 1、管理员</Comment>
       <DataType>smallint(6)|0s</DataType>
@@ -1252,7 +1260,7 @@
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="216" name="status">
+    <column id="287" parent="216" name="status">
       <Position>6</Position>
       <Comment>0、禁用 1、正常</Comment>
       <DataType>smallint(6)|0s</DataType>
@@ -1260,47 +1268,47 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="216" name="crTime">
+    <column id="288" parent="216" name="crTime">
       <Position>7</Position>
       <Comment>创建时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="216" name="lastTime">
+    <column id="289" parent="216" name="lastTime">
       <Position>8</Position>
       <Comment>最后登录时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="288" parent="216" name="PRIMARY">
+    <key id="290" parent="216" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="289" parent="217" name="id">
+    <column id="291" parent="217" name="id">
       <Position>1</Position>
       <Comment>主键</Comment>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="217" name="uid">
+    <column id="292" parent="217" name="uid">
       <Position>2</Position>
       <Comment>用户ID</Comment>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="217" name="rid">
+    <column id="293" parent="217" name="rid">
       <Position>3</Position>
       <Comment>角色ID</Comment>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="292" parent="217" name="PRIMARY">
+    <key id="294" parent="217" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

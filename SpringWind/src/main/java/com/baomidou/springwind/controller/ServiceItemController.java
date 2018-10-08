@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -53,7 +54,7 @@ public class ServiceItemController extends BaseController {
     @Login(action = Action.Skip)
     @Permission(action = Action.Skip)
     @RequestMapping("/getServiceItemListForFront")
-    public String getServiceItemListForFront(String serviceType) {
+    public JSONObject getServiceItemListForFront(String serviceType) {
         Page<ServiceItem> page = getPage();
         EntityWrapper ew=new EntityWrapper();
         ew.setEntity(new ServiceItem());
@@ -61,7 +62,10 @@ public class ServiceItemController extends BaseController {
             ew.eq("serviceType",serviceType);
         }
         ew.orderBy("insertTime",false);
-        return jsonPage(serviceItemService.selectPage(page, ew));
+        List<ServiceItem> serviceItems = serviceItemService.selectList(ew);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("data",serviceItems);
+        return jsonObject;
     }
 
     @ResponseBody

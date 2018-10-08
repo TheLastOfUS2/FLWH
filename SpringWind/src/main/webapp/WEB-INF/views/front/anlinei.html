@@ -21,8 +21,8 @@
                     var d = JSON.parse(data);
                     console.log(d);
                     if (d.result != null) {
-                        $(".art0").html(d.result.editText);
-                        $(".sj-art0").html(d.result.editText);
+                        // $(".art0").html(d.result.editText);
+                        // $(".sj-art0").html(d.result.editText);
                         var imageLunBo = "";
                         var imageList = d.result.imageId.split(",");
                         console.log(imageList);
@@ -41,13 +41,23 @@
             if (serviceType != ""&&serviceType!=null){
                 partOfServiceItem(serviceType);
             } else {
+                $("#a1").css("text-decoration", "none"); //加上下划线
+                $("#ap1").css("text-decoration", "none"); //加上下划线
+                $("#ap2").css("text-decoration", "none");  //去掉下划线
+                $("#ap3").css("text-decoration", "none");  //去掉下划线
+                $("#ap4").css("text-decoration", "none");  //去掉下划线
+                $("#ap5").css("text-decoration", "none");  //去掉下划线
+                $("#a2").css("text-decoration", "none");  //去掉下划线
+                $("#a3").css("text-decoration", "none");  //去掉下划线
+                $("#a4").css("text-decoration", "none");  //去掉下划线
+                $("#a5").css("text-decoration", "none");  //去掉下划线
                 $.ajax({
                     url: "#springUrl('/sys/serviceItem/getServiceItemListForFront')",
                     type: "POST",
                     success: function (data) {
                         var d = JSON.parse(data);
                         console.log(d);
-                        var serviceItemList = d.rows;
+                        var serviceItemList = d.data;
                         var serviceItemOne = '';
                         if (serviceItemList != null && serviceItemList.length !== 0) {
                             console.log(serviceItemList);
@@ -116,6 +126,73 @@
         };
 
         function partOfServiceItem(id) {
+            if (id =="1"){
+                $("#a1").css("text-decoration", "underline"); //加上下划线
+                $("#ap1").css("text-decoration", "underline"); //加上下划线
+                $("#ap2").css("text-decoration", "none");  //去掉下划线
+                $("#ap3").css("text-decoration", "none");  //去掉下划线
+                $("#ap4").css("text-decoration", "none");  //去掉下划线
+                $("#ap5").css("text-decoration", "none");  //去掉下划线
+                $("#a2").css("text-decoration", "none");  //去掉下划线
+                $("#a3").css("text-decoration", "none");  //去掉下划线
+                $("#a4").css("text-decoration", "none");  //去掉下划线
+                $("#a5").css("text-decoration", "none");  //去掉下划线
+            }else if (id=="2"){
+                $("#ap2").css("text-decoration", "underline"); //加上下划线
+                $("#a2").css("text-decoration", "underline"); //加上下划线
+                $("#ap1").css("text-decoration", "none");  //去掉下划线
+                $("#ap3").css("text-decoration", "none");  //去掉下划线
+                $("#ap4").css("text-decoration", "none");  //去掉下划线
+                $("#ap5").css("text-decoration", "none");  //去掉下划线
+                $("#a1").css("text-decoration", "none");  //去掉下划线
+                $("#a3").css("text-decoration", "none");  //去掉下划线
+                $("#a4").css("text-decoration", "none");  //去掉下划线
+                $("#a5").css("text-decoration", "none");  //去掉下划线
+            } else if (id=="3"){
+                $("#ap3").css("text-decoration", "underline"); //加上下划线
+                $("#a3").css("text-decoration", "underline"); //加上下划线
+                $("#ap1").css("text-decoration", "none");  //去掉下划线
+                $("#ap2").css("text-decoration", "none");  //去掉下划线
+                $("#ap4").css("text-decoration", "none");  //去掉下划线
+                $("#ap5").css("text-decoration", "none");  //去掉下划线
+                $("#a1").css("text-decoration", "none");  //去掉下划线
+                $("#a2").css("text-decoration", "none");  //去掉下划线
+                $("#a4").css("text-decoration", "none");  //去掉下划线
+                $("#a5").css("text-decoration", "none");  //去掉下划线
+            }else if (id=="4"){
+                $("#ap4").css("text-decoration", "underline"); //加上下划线
+                $("#a4").css("text-decoration", "underline"); //加上下划线
+                $("#ap1").css("text-decoration", "none");  //去掉下划线
+                $("#ap3").css("text-decoration", "none");  //去掉下划线
+                $("#ap2").css("text-decoration", "none");  //去掉下划线
+                $("#ap5").css("text-decoration", "none");  //去掉下划线
+                $("#a1").css("text-decoration", "none");  //去掉下划线
+                $("#a3").css("text-decoration", "none");  //去掉下划线
+                $("#a2").css("text-decoration", "none");  //去掉下划线
+                $("#a5").css("text-decoration", "none");  //去掉下划线
+            }else if (id=="5"){
+                $("#ap5").css("text-decoration", "underline"); //加上下划线
+                $("#a5").css("text-decoration", "underline"); //加上下划线
+                $("#ap1").css("text-decoration", "none");  //去掉下划线
+                $("#ap3").css("text-decoration", "none");  //去掉下划线
+                $("#ap4").css("text-decoration", "none");  //去掉下划线
+                $("#ap2").css("text-decoration", "none");  //去掉下划线
+                $("#a1").css("text-decoration", "none");  //去掉下划线
+                $("#a3").css("text-decoration", "none");  //去掉下划线
+                $("#a4").css("text-decoration", "none");  //去掉下划线
+                $("#a2").css("text-decoration", "none");  //去掉下划线
+            }else {
+                $("#a1").css("text-decoration", "none"); //加上下划线
+                $("#ap1").css("text-decoration", "none"); //加上下划线
+                $("#ap2").css("text-decoration", "none");  //去掉下划线
+                $("#ap3").css("text-decoration", "none");  //去掉下划线
+                $("#ap4").css("text-decoration", "none");  //去掉下划线
+                $("#ap5").css("text-decoration", "none");  //去掉下划线
+                $("#a2").css("text-decoration", "none");  //去掉下划线
+                $("#a3").css("text-decoration", "none");  //去掉下划线
+                $("#a4").css("text-decoration", "none");  //去掉下划线
+                $("#a5").css("text-decoration", "none");  //去掉下划线
+            }
             $(".art2").empty();
             $.ajax({
                 url: "#springUrl('/sys/serviceItem/getServiceItemListForFront')",
@@ -124,7 +201,7 @@
                 success: function (data) {
                     var d = JSON.parse(data);
                     console.log(d);
-                    var serviceItemList = d.rows;
+                    var serviceItemList = d.data;
                     var serviceItemOne = '';
                     if (serviceItemList != null && serviceItemList.length !== 0) {
                         console.log(serviceItemList);
@@ -259,21 +336,21 @@
         <!-- 导航部分 -->
         <p class="art1">
             <a href="javascript:void(0);" onclick="partOfServiceItem()" class="art11">作品案例 ｜</a>
-            <a href="javascript:void(0);" onclick="partOfServiceItem(1)" class="xs">活动策划执行</a>
-            <a href="javascript:void(0);" onclick="partOfServiceItem(2)">会议承办</a>
-            <a href="javascript:void(0);" onclick="partOfServiceItem(3)">影视拍摄</a>
-            <a href="javascript:void(0);" onclick="partOfServiceItem(4)">视觉传达</a>
-            <a href="javascript:void(0);" onclick="partOfServiceItem(5)">新媒体互动营销</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(1)" class="xs" id="a1">活动策划执行</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(2)" id="a2">会议承办</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(3)" id="a3">影视拍摄</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(4)" id="a4">视觉传达</a>
+            <a href="javascript:void(0);" onclick="partOfServiceItem(5)" id="a5">新媒体互动营销</a>
         </p>
         <!-- 手机版 -->
         <div class="sj-art1">
             <a href="javascript:void(0);" onclick="partOfServiceItem()" class="sj-art11">作品案例 ｜</a>
             <div class="sj-art12">
-                <a href="javascript:void(0);" onclick="partOfServiceItem(1)" class="xs">活动策划执行</a>
-                <a href="javascript:void(0);" onclick="partOfServiceItem(2)">会议承办</a>
-                <a href="javascript:void(0);" onclick="partOfServiceItem(3)">影视拍摄</a>
-                <a href="javascript:void(0);" onclick="partOfServiceItem(4)">视觉传达</a>
-                <a href="javascript:void(0);" onclick="partOfServiceItem(5)">新媒体互动营销</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(1)" class="xs" id="ap1">活动策划执行</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(2)" id="ap2">会议承办</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(3)" id="ap3">影视拍摄</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(4)" id="ap4">视觉传达</a>
+                <a href="javascript:void(0);" onclick="partOfServiceItem(5)" id="ap5">新媒体互动营销</a>
             </div>
         </div>
         <!-- 图片部分 -->
