@@ -50,6 +50,12 @@
         display: block;
         margin: 15px auto;
     }
+    .art2 p{
+        margin-bottom: 15px;
+    }
+    .art2 img{
+        max-width: 100%;
+    }
 }
 
 @media screen and (min-width: 601px) and (max-width: 1000px) {
@@ -103,6 +109,12 @@
         width: 120px;
         display: block;
         margin: 15px auto;
+    }
+    .art2 p{
+        margin-bottom: 15px;
+    }
+    .art2 img{
+        max-width: 100%;
     }
 }
 
@@ -161,6 +173,12 @@
         width: 120px;
         display: block;
         margin: 15px auto;
+    }
+    .art2 p{
+        margin-bottom: 15px;
+    }
+    .art2 img{
+        max-width: 100%;
     }
 }
 

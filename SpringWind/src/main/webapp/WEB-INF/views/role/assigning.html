@@ -64,6 +64,7 @@ $(function() {
 		success:function(data){
 			if(data){
 				var treeNodes = JSON.parse(data);
+				console.log(treeNodes);
 				$.fn.zTree.init($("#treeDiv"), setting, treeNodes);
 			}
 		}
