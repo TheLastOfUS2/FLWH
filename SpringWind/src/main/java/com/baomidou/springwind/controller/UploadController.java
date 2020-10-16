@@ -80,7 +80,7 @@ public class UploadController extends BaseController {
 	 * </p>
 	 */
 	private static String getSaveDir() {
-		StringBuffer filePath = new StringBuffer(System.getProperty("user.dir"));
+		StringBuffer filePath = new StringBuffer("/usr/image");
 		filePath.append(File.separator);
 		filePath.append(DateUtil.format(new Date(), "yyyy"));
 		filePath.append(File.separator);
